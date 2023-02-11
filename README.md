@@ -7,7 +7,7 @@ C'est la conception et la réalisation d'un projet digital, en groupe, qui éman
 **Le projet doit :**
  - Répondre à un besoins ou à un usage
  - Être techniquement réalisable et viable économiquement
- - Représenter un défi intéressan sur le plan technique 
+ - Représenter un défi intéressant sur le plan technique 
  - Satisfaire le client et les utilisateurs finaux
  - Répondre au cahier des charges 
 
@@ -22,7 +22,7 @@ Voici les technologies utilisés pour le projet :
 
 1 - Cloner le dépôt git hub : 
 ```sh
-git clone
+git clone https://github.com/LDDW/mongrandfrere.git
 ```
 
 ## License
