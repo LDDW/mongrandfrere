@@ -5,7 +5,7 @@ Mon grand frère est une entreprise qui va aider les personnes à la recherche d
 C'est la conception et la réalisation d'un projet digital, en groupe, qui émane des étudiants (projet fictif) ou qui répond à une demande réelle.
 
 **Le projet doit :**
- - Répondre à un besoins ou à un usage
+ - Répondre à un besoin ou à un usage
  - Être techniquement réalisable et viable économiquement
  - Représenter un défi intéressant sur le plan technique 
  - Satisfaire le client et les utilisateurs finaux
