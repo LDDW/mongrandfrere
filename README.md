@@ -1,5 +1,5 @@
 # Mon Grand Frère - MyDitialProject
-Mon grand frère est une entreprise qui va aider des personnes à améliorer sont profil pour être recruté (CV, Profile linkedin...). Dans le cadre de My Digital Project, j'interviens en tant que développeur pour réaliser une solution innovante qui répond au cahier des charges. Le but du projet est de réaliser un site web avec différentes sections (blog, formations, tableau de gestion admin...). 
+Mon grand frère est une entreprise qui va aider les personnes à la recherche d'un emploi, d’une alternance ou d’un stage. Dans le cadre de My Digital Project, j'interviens en tant que développeur pour réaliser une solution innovante qui répond au cahier des charges. Le but du projet est de réaliser un site web avec différentes sections (blog, formations, tableau de gestion admin...). 
 
 ## My Digital Project, qu'est-ce que c'est ? 
 C'est la conception et la réalisation d'un projet digital, en groupe, qui émane des étudiants (projet fictif) ou qui répond à une demande réelle.
@@ -27,4 +27,3 @@ git clone https://github.com/LDDW/mongrandfrere.git
 
 ## License
 MIT
-
