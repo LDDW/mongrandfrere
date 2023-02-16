@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import LayoutsClient from '../layouts/LayoutsClient';
 
 export default function Login(){
 
@@ -29,7 +30,7 @@ export default function Login(){
     }
 
     return(
-        <>
+        <LayoutsClient>
             <h1>Login</h1>
             <form>
                 <input type="text" placeholder="email"/>
@@ -47,6 +48,6 @@ export default function Login(){
                 <button onClick={handleSubmit}>Register</button>
                 {err && <p>erreur</p>}
             </form>
-        </>
+        </LayoutsClient>
     );
 }
