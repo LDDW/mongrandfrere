@@ -1,8 +1,8 @@
 import express from "express";
-import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
-import { check, validationResult } from 'express-validator'
-import {db} from "../db.js"
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { check, validationResult } from 'express-validator';
+import {db} from "../db.js";
 
 const router = express.Router();
 
@@ -35,18 +35,13 @@ router.post('/register',
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password.trim(), salt);
 
-            const q = "INSERT INTO users(`lastname`, `firstname`, `email`, `phone`, `password`, `address`) VALUES (?)";
+            const q = "INSERT INTO users(`lastname`, `firstname`, `email`, `phone`, `password`) VALUES (?)";
             const values = [
                 req.body.lastname.trim(),
                 req.body.firstname.trim(),
                 req.body.email.trim(),
                 req.body.phone.trim(),
                 hash,
-                JSON.stringify({
-                    "name": "Ironman",
-                    "address": "ani@gamil.com",
-                    "city": "bhilai"
-                })
             ];
 
             db.query(q,[values], (err,data)=>{
