@@ -9,7 +9,10 @@ export default function Login(){
         email:"",
         phone:"",
         password:"",
+        confirm_password: "",
     })
+
+    const [err, setError] = useState(false);
 
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -20,7 +23,8 @@ export default function Login(){
         try {
             await axios.post("http://localhost:3001/api/auth/register", inputs)
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data);
+            setError(true);
         }
     }
 
@@ -39,8 +43,9 @@ export default function Login(){
                 <input type="email" placeholder="email" name='email' onChange={handleChange}/>
                 <input type="tel" placeholder="phone" name='phone' onChange={handleChange}/>
                 <input type="password" placeholder="password" name='password' onChange={handleChange}/>
-                <input type="password" placeholder="confirm password"/>
+                <input type="password" placeholder="confirm password" name='confirm_password' onChange={handleChange}/>
                 <button onClick={handleSubmit}>Register</button>
+                {err && <p>erreur</p>}
             </form>
         </>
     );
