@@ -1,0 +1,47 @@
+import { useState } from 'react';
+import axios from 'axios';
+
+export default function Login(){
+
+    const [inputs, setInputs] = useState({
+        lastname:"",
+        firstname:"",
+        email:"",
+        phone:"",
+        password:"",
+    })
+
+    const handleChange = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        try {
+            await axios.post("http://localhost:3001/api/auth/register", inputs)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return(
+        <>
+            <h1>Login</h1>
+            <form>
+                <input type="text" placeholder="email"/>
+                <input type="password" placeholder="password"/>
+            </form>
+
+            <h1>Register</h1>
+            <form>
+                <input type="text" placeholder="lastname" name='lastname' onChange={handleChange}/>
+                <input type="text" placeholder="firstname" name='firstname' onChange={handleChange}/>
+                <input type="email" placeholder="email" name='email' onChange={handleChange}/>
+                <input type="tel" placeholder="phone" name='phone' onChange={handleChange}/>
+                <input type="password" placeholder="password" name='password' onChange={handleChange}/>
+                <input type="password" placeholder="confirm password"/>
+                <button onClick={handleSubmit}>Register</button>
+            </form>
+        </>
+    );
+}
