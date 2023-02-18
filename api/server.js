@@ -1,8 +1,9 @@
 //DEPENDENCIES
-import express from "express"
+import express from "express";
 import cors from "cors";
 //IMPORTS ROUTES FILES
-import userAuth from "./user/auth.js"
+import userAuth from "./user/auth.js";
+import adminAuth from "./admin/auth.js";
 
 const app = express();
 const admin = express();
@@ -16,7 +17,7 @@ app.use(cors())
 
 // ROUTES ADMIN
     // ROUTES AUTH
-    // admin.use("/admin/", authRoutes);
+    admin.use("/admin/auth", adminAuth);
 
 app.listen(3001, () => {
     console.log('Connected');

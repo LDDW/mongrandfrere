@@ -1,8 +1,10 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import randomToken from "random-web-token";
 import { check, validationResult } from 'express-validator';
 import {db} from "../db.js";
+import registerEmail from "./emails/registerEmail.js";
 
 const router = express.Router();
 
@@ -20,21 +22,21 @@ router.post('/register',
     }),
     (req,res)=>{
         const errors = validationResult(req);
-
+        
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
         //CHECK EXISTING USER
         const q = "SELECT * FROM users WHERE email = ? OR phone = ?"
-
+        
         db.query(q, [req.body.email, req.body.phone], (err, data)=>{
             if(err) return res.status(500).json(err);
             if(data.length) return res.status(409).json("L'utilisateur exist déjà !");
-
+            
             //HASH PASSWORD AND CREATE USER
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password.trim(), salt);
-
+            
             const q = "INSERT INTO users(`lastname`, `firstname`, `email`, `phone`, `password`) VALUES (?)";
             const values = [
                 req.body.lastname.trim(),
@@ -43,10 +45,12 @@ router.post('/register',
                 req.body.phone.trim(),
                 hash,
             ];
-
+            
             db.query(q,[values], (err,data)=>{
                 if(err) return res.status(500).json(err);
-                return res.status(200).json("L'utilisateur à été créer")
+                // SEND EMAIl REGISTER VERIFICATION 
+                registerEmail(req.body.email.trim(), randomToken.genSync("extra", 50));
+                return res.status(200).json("L'utilisateur à été créer")                
             });
         });
     },
