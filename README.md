@@ -25,5 +25,19 @@ Voici les technologies utilisés pour le projet :
 git clone https://github.com/LDDW/mongrandfrere.git
 ```
 
+2 - Installation côté client : 
+```sh
+cd /client
+npm install
+npm start
+```
+
+3 - Installation côté api : 
+```sh
+cd /api
+npm install
+npm start
+```
+
 ## License
 MIT
