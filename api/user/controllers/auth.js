@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import randomToken from "random-web-token";
-import {    check, validationResult } from 'express-validator';
+import { check, validationResult } from 'express-validator';
 
 import { db } from "../db.js";
 import registerEmail from "../emails/registerEmail.js";
@@ -20,6 +20,7 @@ export const register = [
     }), 
     (req, res) => {
         const errors = validationResult(req);
+        
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
