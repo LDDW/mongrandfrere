@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import LayoutsClient from '../layouts/LayoutsClient';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(){
 
@@ -15,6 +16,8 @@ export default function Login(){
 
     const [err, setError] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -22,9 +25,10 @@ export default function Login(){
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:3001/api/auth/register", inputs)
+            await axios.post("http://localhost:3002/api/auth/register", inputs)
+            navigate("/envoi-verification-email");
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
             setError(true);
         }
     }
