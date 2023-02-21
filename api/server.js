@@ -1,14 +1,17 @@
 //DEPENDENCIES
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 //IMPORTS ROUTES FILES
 import userRoute from "./user/route.js";
 import adminAuth from "./admin/auth.js";
+
 
 const app = express();
 const admin = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 // USERS ROUTES 

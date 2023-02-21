@@ -1,13 +1,13 @@
 import { transport } from "./config.js"
 
-export default function registerEmail(email, token) {
+export default function confirmRegisterEmail(email){
 
     const mailOptions = {
         from: `MonGrandFrère`, 
         to: email,
-        subject: 'Vérifier votre email',
-        text: 'For clients with plaintext support only',
-        html: `<a href="http://localhost:3000/verification-email?token=${token}">Confirmer l'inscritpion</a>`,
+        subject: 'Confirmation de votre inscription',
+        text: 'Votre email a bien été confirmer',
+        html: `<p>Bienvenu votre email a bien été confirmer</p>`,
     };
 
     transport.sendMail(mailOptions, function(err, info) {

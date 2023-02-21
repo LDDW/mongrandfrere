@@ -19,14 +19,14 @@ export const register = [
         return true;
     }), 
     (req, res) => {
+        // VERIFY CHECK ERRORS
         const errors = validationResult(req);
-        
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
 
         // //CHECK EXISTING USER
-        const q = "SELECT * FROM users WHERE email = ? OR phone = ?"
+        const q = "SELECT * FROM users WHERE email = ? OR phone = ?";
     
         db.query(q, [req.body.email, req.body.phone], (err, data)=>{
             if(err) return res.status(500).json(err);
@@ -60,9 +60,30 @@ export const register = [
 ]
 
 export const login = [(req, res) => {
+    const q = "SELECT * FROM users WHERE email = ?";
 
-}]
+    db.query(q, [req.body.email], (err, data) => {
+        if(err) return res.status(500).json(err);
+        if(data.length === 0) return res.status(404).json("User not found !");
+
+        //chek password
+        const passwordIsCorrect = bcrypt.compareSync(req.body.password, data[0].password);
+
+        if(!passwordIsCorrect) return res.status(400).json("Wrong email or password");
+        
+        const token = jwt.sign({ id: data[0].id }, "jwtkey");
+        const { password, ...other } = data[0];
+
+        res.cookie('access_token', token, {
+            httpOnly: true
+        }).status(200).json(other)
+
+    });
+}];
 
 export const logout = (req, res) => {
-    
+    res.clearCookie("access_token",{
+        sameSite:"none",
+        secure:true
+    }).status(200).json("User has been logged out.")
 }
