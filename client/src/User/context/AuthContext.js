@@ -1,29 +1,39 @@
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(
-        JSON.parse(localStorage.getItem("user")) || null
-    );
 
-    const login = async (inputs) => {
-        const res = await axios.post("http://localhost:3002/api/auth/login", inputs);
-        setCurrentUser(res.data);
-    };
-
-    const logout = async (inputs) => {
-        await axios.post("http://localhost:3002/api/auth/logout");
-        setCurrentUser(null);
-    };
+    const [authUserCookie, setAuthUserCoookie] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(currentUser));
-    }, [currentUser]);
+        document.cookie.split(';').forEach(cookie => {
+            const [name, value] = cookie.split('=');
+            if (name.trim() === 'user-token') {
+                setAuthUserCoookie(true)
+            } 
+        })
+    }, [authUserCookie]);
+
+    const login = async (inputs) => {
+        const res = await axios.post("http://localhost:3002/api/auth/login", inputs, {
+            withCredentials: true
+        });
+        if(res.status === 200){
+            setAuthUserCoookie(true)
+        }
+    };
+
+    const logout = async () => {
+        await axios.post("http://localhost:3002/api/auth/logout", '', {
+            withCredentials: true
+        });
+        setAuthUserCoookie(false);
+    };
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider value={{authUserCookie, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import LayoutsClient from '../layouts/LayoutsClient';
 
+
 export default function Login(){
 
     const [inputs, setInputs] = useState({
@@ -10,7 +11,7 @@ export default function Login(){
         password:"",
     })
 
-    // const [err, setError] = useState(false);
+    const [err, setError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -23,11 +24,11 @@ export default function Login(){
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await login(inputs)
+            await login(inputs);
             navigate('/')
         } catch (error) {
             console.log(error);
-            // setError(true);
+            setError(true);
         }
     }
 
@@ -38,6 +39,7 @@ export default function Login(){
                 <input type="email" placeholder="email" name='email' onChange={handleChange}/>
                 <input type="password" placeholder="password" name='password' onChange={handleChange}/>
                 <button onClick={handleSubmit}>Connexion</button>
+                <p>{ err && 'erreur' }</p>
             </form>
         </LayoutsClient>
     );

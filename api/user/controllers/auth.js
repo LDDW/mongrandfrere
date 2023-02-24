@@ -67,23 +67,31 @@ export const login = [(req, res) => {
         if(data.length === 0) return res.status(404).json("User not found !");
 
         //chek password
-        const passwordIsCorrect = bcrypt.compareSync(req.body.password, data[0].password);
+        const passwordIsCorrect = bcrypt.compare(req.body.password, data[0].password);
 
         if(!passwordIsCorrect) return res.status(400).json("Wrong email or password");
         
         const token = jwt.sign({ id: data[0].id }, "jwtkey");
-        const { password, ...other } = data[0];
 
-        res.cookie('access_token', token, {
-            httpOnly: true
-        }).status(200).json(other)
+        res.cookie('user-token', token, {
+            maxAge: 900000,
+            path:'/',
+            domain: 'localhost',    
+            // httpOnly: true,
+            // secure: true,
+        });
+
+        res.status(200).json("LOGGED IN");
 
     });
 }];
 
 export const logout = (req, res) => {
-    res.clearCookie("access_token",{
-        sameSite:"none",
-        secure:true
-    }).status(200).json("User has been logged out.")
+
+    res.clearCookie('user-token', {
+        path:'/',
+        domain: 'localhost',
+    })
+        
+    res.status(200).json("User has been logged out.")
 }

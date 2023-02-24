@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar(){
 
-    const { currentUser, logout } = useContext(AuthContext);
+    const { authUserCookie, logout } = useContext(AuthContext);
 
     return (
         <>
@@ -22,7 +22,7 @@ export default function Navbar(){
                     <li><Link to="/actualités">Actualités</Link></li>
                     <li><Link to="/qui-sommes-nous">Qui sommes-nous</Link></li>
                     <li>    
-                        {currentUser ? (
+                        {authUserCookie ? (
                             <span onClick={logout}>Logout</span>
                         ) : (
                             <Link className="link" to="/login">
