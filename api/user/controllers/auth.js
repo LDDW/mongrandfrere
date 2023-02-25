@@ -11,7 +11,6 @@ export const register = [
     check('lastname').trim().not().isEmpty().isLength({ min: 2 }),
     check('firstname').trim().not().isEmpty().isLength({ min: 2 }),
     check('email').trim().isEmail().normalizeEmail(),
-    check('phone').trim().isMobilePhone(),
     check('password').trim().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/),
     check('confirm_password').trim().custom((value, { req }) => {
         if (value !== req.body.password) {

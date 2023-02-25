@@ -22,7 +22,7 @@ function App() {
         {/* ACCOUNT */}
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/mot-de-pas-oublie' element={<ForgottenPassword/>}/>
+        <Route path='/mot-de-passe-oublie' element={<ForgottenPassword/>}/>
         {/* EMAILS */}
         <Route path='/verification-email' element={<EmailVerify/>}/>
         <Route path='/envoi-verification-email' element={<SendEmailVerify />}/>
