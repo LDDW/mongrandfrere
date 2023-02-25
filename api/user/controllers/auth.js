@@ -5,6 +5,7 @@ import { check, validationResult } from 'express-validator';
 
 import { db } from "../db.js";
 import registerEmail from "../emails/registerEmail.js";
+import resetPassword from "../emails/resetPassword.js";
 
 export const register = [
     check('lastname').trim().not().isEmpty().isLength({ min: 2 }),
@@ -49,7 +50,7 @@ export const register = [
                 token,
             ];
             
-            db.query(q,[values], (err,data)=>{
+            db.query(q,[values], (err,data) => {
                 if(err) return res.status(500).json(err);
                 // SEND EMAIl REGISTER VERIFICATION 
                 registerEmail(req.body.email.trim(), token);
@@ -59,7 +60,10 @@ export const register = [
     }
 ]
 
-export const login = [(req, res) => {
+export const login = [
+    check('email').trim().isEmail().normalizeEmail(),
+    check('password').not().isEmpty(),
+    (req, res) => {
     const q = "SELECT * FROM users WHERE email = ?";
 
     db.query(q, [req.body.email], (err, data) => {
@@ -68,9 +72,8 @@ export const login = [(req, res) => {
 
         //chek password
         const passwordIsCorrect = bcrypt.compare(req.body.password, data[0].password);
-
         if(!passwordIsCorrect) return res.status(400).json("Wrong email or password");
-        
+
         const token = jwt.sign({ id: data[0].id }, "jwtkey");
 
         res.cookie('user-token', token, {
@@ -80,9 +83,7 @@ export const login = [(req, res) => {
             // httpOnly: true,
             // secure: true,
         });
-
         res.status(200).json("LOGGED IN");
-
     });
 }];
 
@@ -95,3 +96,23 @@ export const logout = (req, res) => {
         
     res.status(200).json("User has been logged out.")
 }
+
+export const ForgottenPassword = [
+    check('email').trim().isEmail().normalizeEmail(),
+    (req, res) => {
+        const q = "SELECT * FROM users WHERE email = ?"
+
+        db.query(q, [req.body.email], (err, data) => {
+            if(err) return res.status(500).json(err);
+
+            // GENERATE TOKEN
+            const token = randomToken.genSync("extra", 50);
+            
+            if(data.length === 1){
+                resetPassword(data[0].email, token)
+            }
+
+            res.status(200).json('Un email avec un code à été envoyé')
+        });
+    }
+]

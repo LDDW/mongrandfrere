@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import LayoutsClient from '../layouts/LayoutsClient';
 
@@ -41,6 +41,7 @@ export default function Login(){
                 <button onClick={handleSubmit}>Connexion</button>
                 <p>{ err && 'erreur' }</p>
             </form>
+            <Link to="/mot-de-pas-oublie">Mot de passe oublié</Link>
         </LayoutsClient>
     );
 }

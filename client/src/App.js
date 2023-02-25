@@ -9,25 +9,26 @@ import Register from './User/pages/Register';
 import EmailVerify from './User/pages/emails/EmailVerify';
 import SendEmailVerify from './User/pages/emails/SendEmailVerify';
 import PageNoFound from './User/pages/PageNoFound';
+import ForgottenPassword from './User/pages/ForgottenPassword';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/formations' element={<Formations/>}/>
-          <Route path='/actualités' element={<News/>}/>
-          <Route path='/qui-sommes-nous' element={<About/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-          {/* EMAILS */}
-          <Route path='/verification-email' element={<EmailVerify/>}/>
-          <Route path='/envoi-verification-email' element={<SendEmailVerify />}/>
-          <Route path='*' element={<PageNoFound/>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/formations' element={<Formations/>}/>
+        <Route path='/actualités' element={<News/>}/>
+        <Route path='/qui-sommes-nous' element={<About/>}/>
+        {/* ACCOUNT */}
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/mot-de-pas-oublie' element={<ForgottenPassword/>}/>
+        {/* EMAILS */}
+        <Route path='/verification-email' element={<EmailVerify/>}/>
+        <Route path='/envoi-verification-email' element={<SendEmailVerify />}/>
+        <Route path='*' element={<PageNoFound/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
