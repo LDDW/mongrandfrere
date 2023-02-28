@@ -67,7 +67,7 @@ export default function Login(){
 
                     <p className='text-center text-sm'> 
                         <span>Vous n'avez pas de compte ? </span> 
-                        <Link to="/register" className='text-blue-600 hover:underline dark:text-blue-500'>Inscription</Link>
+                        <Link to="/inscription" className='text-blue-600 hover:underline dark:text-blue-500'>Inscription</Link>
                     </p>
                 </form>
             </Card>
