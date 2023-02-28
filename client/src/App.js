@@ -20,8 +20,8 @@ function App() {
         <Route path='/actualités' element={<News/>}/>
         <Route path='/qui-sommes-nous' element={<About/>}/>
         {/* ACCOUNT */}
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
+        <Route path='/connexion' element={<Login/>}/>
+        <Route path='/inscription' element={<Register/>}/>
         <Route path='/mot-de-passe-oublie' element={<ForgottenPassword/>}/>
         {/* EMAILS */}
         <Route path='/verification-email' element={<EmailVerify/>}/>

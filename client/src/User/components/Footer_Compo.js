@@ -1,4 +1,4 @@
-export default function Footer(){
+export default function Footer_Compo(){
     return (
         <>
             <footer>
