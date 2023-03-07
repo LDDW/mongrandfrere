@@ -10,14 +10,14 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         document.cookie.split(';').forEach(cookie => {
             const [name, value] = cookie.split('=');
-            if (name.trim() === 'user-token') {
+            if (name.trim() === 'usertoken') {
                 setAuthUserCoookie(true)
             } 
         })
     }, [authUserCookie]);
 
     const login = async (inputs) => {
-        const res = await axios.post("http://localhost:3002/api/auth/login", inputs, {
+        const res = await axios.post("http://localhost:3003/api/auth/login", inputs, {
             withCredentials: true
         });
         if(res.status === 200){
@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     const logout = async () => {
-        await axios.post("http://localhost:3002/api/auth/logout", '', {
+        await axios.post("http://localhost:3003/api/auth/logout", '', {
             withCredentials: true
         });
         setAuthUserCoookie(false);

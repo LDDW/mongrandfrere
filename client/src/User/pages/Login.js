@@ -10,6 +10,7 @@ export default function Login(){
     const [inputs, setInputs] = useState({
         email:"",
         password:"",
+        remember:"",
     })
 
     const [err, setError] = useState(false);
@@ -57,7 +58,7 @@ export default function Login(){
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <Checkbox id="remember" />
+                            <Checkbox id="remember" name="remember" onChange={handleChange}/>
                             <Label htmlFor="remember">Se souvenir de moi</Label>
                         </div>
                         <Link to="/mot-de-passe-oublie" className='text-sm text-blue-600 hover:underline dark:text-blue-500'>Mot de passe oublié ?</Link>

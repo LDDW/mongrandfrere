@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import randomToken from "random-web-token";
 import { check, validationResult } from 'express-validator';
+import ms from "ms";
 
 import { db } from "../db.js";
 import registerEmail from "../emails/registerEmail.js";
@@ -63,6 +64,7 @@ export const login = [
     check('email').trim().isEmail().normalizeEmail(),
     check('password').not().isEmpty(),
     (req, res) => {
+    
     const q = "SELECT * FROM users WHERE email = ?";
 
     db.query(q, [req.body.email], (err, data) => {
@@ -75,20 +77,31 @@ export const login = [
 
         const token = jwt.sign({ id: data[0].id }, "jwtkey");
 
-        res.cookie('user-token', token, {
-            maxAge: 900000,
-            path:'/',
-            domain: 'localhost',    
-            // httpOnly: true,
-            // secure: true,
-        });
+        if(req.body.remember === "on"){
+            res.cookie('usertoken', token, {
+                maxAge: ms('30 days'),
+                path:'/',
+                domain: 'localhost',
+                httpOnly: false,
+                // secure: true,
+            });
+        } else {
+            res.cookie('usertoken', token, {
+                path:'/',
+                domain: 'localhost',
+                expires: 0,
+                httpOnly: false,
+                // secure: true,
+            });
+        }
+        
         res.status(200).json("LOGGED IN");
     });
 }];
 
 export const logout = (req, res) => {
 
-    res.clearCookie('user-token', {
+    res.clearCookie('usertoken', {
         path:'/',
         domain: 'localhost',
     })

@@ -19,7 +19,7 @@ export default function ForgottenPassword(){
 
     const handleSubmit = () => {
         try {
-            axios.post('http://localhost:3002/api/', email)
+            axios.post('http://localhost:3003/api/', email)
             navigate('/')
         } catch (error) {
             setError(true)

@@ -6,24 +6,19 @@ import cookieParser from "cookie-parser";
 import userRoute from "./user/route.js";
 import adminAuth from "./admin/auth.js";
 import session from "express-session";
-import jwt from "jsonwebtoken";
 
 
 const app = express();
 const admin = express();
+app.use(express.json());
 app.use(cookieParser());
 app.use(session({
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: "sessionss",
-    cookie: {
-        maxAge: 1000*60*60,
-        sameSite: "none",
-        secure: true,
-    }
+    cookie: { secure: true }
 }));
-app.use(express.json());
-app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
+app.use(cors({ credentials:true, origin:'http://localhost:3001' }));
 
 // USERS ROUTES 
     // AUTH ROUTES 
@@ -33,6 +28,6 @@ app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
     // ROUTES AUTH
     admin.use("/admin/auth", adminAuth);
 
-app.listen(3002, () => {
-    console.log('Connected');
+app.listen(3003, () => {
+    console.log('Connected server');
 })

@@ -10,6 +10,7 @@ import EmailVerify from './User/pages/emails/EmailVerify';
 import SendEmailVerify from './User/pages/emails/SendEmailVerify';
 import PageNoFound from './User/pages/PageNoFound';
 import ForgottenPassword from './User/pages/ForgottenPassword';
+import Account from './User/pages/Account';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/connexion' element={<Login/>}/>
         <Route path='/inscription' element={<Register/>}/>
         <Route path='/mot-de-passe-oublie' element={<ForgottenPassword/>}/>
+        <Route path='/mon-compte' element={<Account/>}/>
         {/* EMAILS */}
         <Route path='/verification-email' element={<EmailVerify/>}/>
         <Route path='/envoi-verification-email' element={<SendEmailVerify />}/>

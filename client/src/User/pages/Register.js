@@ -26,7 +26,7 @@ export default function Login(){
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:3002/api/auth/register", inputs)
+            await axios.post("http://localhost:3003/api/auth/register", inputs)
             navigate("/envoi-verification-email");
         } catch (error) {
             console.log(error);
@@ -90,7 +90,7 @@ export default function Login(){
 
                     <p className='text-center text-sm'> 
                         <span>Vous avez déjà un compte ? </span> 
-                        <Link to="/login" className='text-blue-600 hover:underline dark:text-blue-500'>Connexion</Link>
+                        <Link to="/connexion" className='text-blue-600 hover:underline dark:text-blue-500'>Connexion</Link>
                     </p>
                     
                 </form>
