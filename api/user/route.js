@@ -11,7 +11,7 @@ router.post('/auth/login', login);
 router.post('/auth/logout', logout);
 
 // USER ROUTE
-router.post('/account', account)
+router.get('/account', account)
 
 // EMAIL ROUTE
 router.post('/email/verify', verify);

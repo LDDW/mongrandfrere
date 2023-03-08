@@ -18,7 +18,7 @@ app.use(session({
     secret: "sessionss",
     cookie: { secure: true }
 }));
-app.use(cors({ credentials:true, origin:'http://localhost:3001' }));
+app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
 
 // USERS ROUTES 
     // AUTH ROUTES 
