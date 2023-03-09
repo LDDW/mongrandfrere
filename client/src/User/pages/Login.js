@@ -36,7 +36,7 @@ export default function Login(){
 
     return(
         <LayoutsClient>
-            <Card className='w-[500px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+            <Card className='w-[calc(100%-40px)] md:w-[500px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Connexion</h5>
                 <form className='flex flex-col gap-4'>
 

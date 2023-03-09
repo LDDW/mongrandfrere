@@ -37,7 +37,7 @@ export default function Login(){
     return(
         <LayoutsClient>
 
-            <Card className='w-[500px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+            <Card className=' w-100% md:w-[500px] md:absolute md:top-1/2 md:left-1/2 md:-translate-y-1/2 md:-translate-x-1/2'>
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Inscription</h5>
                 <form className='flex flex-col gap-4'>
 
