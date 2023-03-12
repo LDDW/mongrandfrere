@@ -5,18 +5,29 @@ import { AuthContext } from "../context/AuthContext";
 export default function Navbar(){
 
     const { authUserCookie, logout } = useContext(AuthContext);
-    const [ NavIsOpen , SetNavState] = useState(false);
+    const [ dropdownNav , SetNavState] = useState(false);
+    const [ dropdownAccount, SetAccountState] = useState(false);
 
     const handleNavStatus = () => {
-        SetNavState(!NavIsOpen);
+        SetNavState(!dropdownNav);
+        if(dropdownAccount === true ){
+            SetAccountState(!dropdownAccount);
+        }
+    }
+
+    const handleAccountStatus = () => {
+        SetAccountState(!dropdownAccount);
+        if(dropdownNav === true ){
+            SetNavState(!dropdownNav);
+        }
     }
 
     return (
         // ({ isActive }) => (isActive ? 'active' : 'inactive')
         <header className="w-full h-16 bg-gray-100">
             <div className="fixed top-0 z-50 w-full h-16 px-4 flex item-center justify-between bg-white shadow-sm">
-                <div onClick={handleNavStatus} className="w-9 flex items-center outline-none select-none">
-                    { NavIsOpen ? (
+                <div onClick={handleNavStatus} className="w-9 flex items-center outline-none select-none cursor-pointer">
+                    { dropdownNav ? (
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -27,7 +38,7 @@ export default function Navbar(){
                     )}
                 </div>
                 <div className="flex items-center">
-                    <nav className={`fixed ${NavIsOpen ? 'left-0' : '-left-full'} top-16 z-50 h-[calc(100%-64px)] w-full flex flex-col justify-between bg-gray-50 transition-all`}>
+                    <nav className={`fixed ${dropdownNav ? 'left-0' : '-left-full'} top-16 z-50 h-[calc(100%-64px)] w-full flex flex-col justify-between bg-gray-50 transition-all`}>
                         <ul className="p-5">
                             <li className="mb-5"><Link to="/">Accueil</Link></li>
                             <li className="mb-5">
@@ -51,13 +62,15 @@ export default function Navbar(){
                         Brand
                     </div>
                 </div>
-                <div className="w-9 flex items-center">
+                <div className="w-9 flex items-center cursor-pointer">
                     {authUserCookie && 
-                        <div className="relative flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <div className="absolute top-0 hidden">
+                        <div className="relative flex items-center justify-end">
+                            <div className="cursor-pointer" onClick={handleAccountStatus}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-9 h-9">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div className={`${dropdownAccount ? '' : 'hidden'} absolute top-16 z-50 flex flex-col bg-white shadow-sm`}>
                                 <Link to="/mon-compte">Mon compte</Link>
                                 <span onClick={logout}>Déconnexion</span>
                             </div>

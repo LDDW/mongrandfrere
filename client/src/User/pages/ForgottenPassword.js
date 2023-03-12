@@ -27,20 +27,21 @@ export default function ForgottenPassword(){
     }
 
     return(
-        <Card className='w-[500px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
-            <form className="flex flex-col gap-4">
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Mot de passe oublié ?</h5>
-                <p>Entrez votre adresse mail dans le champs ci-dessous pour réinitialiser votre mot de passe</p>
-                <div>
-                    <div className="mb-2 block">
-                        <Label htmlFor="email1" value="Email" />
+        <main className="bg-gray-100 w-full h-screen">
+            <Card className='w-[500px] absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+                <form className="flex flex-col gap-4">
+                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Mot de passe oublié ?</h5>
+                    <p>Entrez votre adresse mail dans le champs ci-dessous pour réinitialiser votre mot de passe</p>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="email1" value="Email" />
+                        </div>
+                        <TextInput id="email1" name='email' type="email" placeholder="email" required={true} onChange={handleSetEmail}/>
                     </div>
-                    <TextInput id="email1" name='email' type="email" placeholder="email" required={true} onChange={handleSetEmail}/>
-                </div>
-
-                <Button onClick={handleSubmit}>Réinitialiser mon mot de passe</Button>
-            </form>
-            <Link className="text-center text-sm text-blue-600 hover:underline dark:text-blue-500'" to='/connexion'>Retour</Link>
-        </Card>
+                    <Button onClick={handleSubmit}>Réinitialiser mon mot de passe</Button>
+                </form>
+                <Link className="text-center text-sm text-blue-600 hover:underline dark:text-blue-500'" to='/connexion'>Retour</Link>
+            </Card>
+        </main>
     );
 }

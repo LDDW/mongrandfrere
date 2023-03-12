@@ -1,7 +1,6 @@
 import { FooterComponent } from "flowbite-react";
 import { FooterBrand } from "flowbite-react/lib/esm/components/Footer/FooterBrand";
 import { FooterCopyright } from "flowbite-react/lib/esm/components/Footer/FooterCopyright";
-import { FooterIcon } from "flowbite-react/lib/esm/components/Footer/FooterIcon";
 import { FooterLink } from "flowbite-react/lib/esm/components/Footer/FooterLink";
 import { FooterLinkGroup } from "flowbite-react/lib/esm/components/Footer/FooterLinkGroup";
 import { FooterTitle } from "flowbite-react/lib/esm/components/Footer/FooterTitle";
@@ -42,7 +41,7 @@ export default function LayoutsClient({children}) {
                             </div>
                         </div>
                     </div>
-                    <hr className="my-6"/>
+                    <hr className="my-6 md:my-10"/>
                     <div className="w-full text-center mb-2">
                         <FooterCopyright href="#" by="Flowbite™" year={2022} />
                     </div>
