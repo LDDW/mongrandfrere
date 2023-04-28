@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+/* ========================= TABLE ========================= */
+.table {
+    @apply block w-full overflow-x-scroll overflow-y-hidden text-sm;
+}
+
+.table tr:not(.table .edit_form){
+    @apply h-12;
+}
+
+.table th {
+    @apply font-semibold text-sm ;
+}
+
+
+.table th:not(tr>th:last-child), 
+.table td:not(tr>td:last-child)
+{
+    @apply pl-4 shrink-0 flex items-center border-r border-gray-200;
+}
+
+.paginate_bar {
+    @apply bg-gray-50 p-3 border-t border-gray-200 flex items-center justify-end;
+}
