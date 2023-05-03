@@ -16,7 +16,7 @@ class Order extends Model
      */
     protected $fillable = [
         'stripe_id',
-        'amount',
+        'invoice_pdf_path',
         'user_id',
         'formation_id',
     ];

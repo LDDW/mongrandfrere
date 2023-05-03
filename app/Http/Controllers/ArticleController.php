@@ -37,12 +37,13 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'status' => 'required|in:draft,published'
+            'title' => 'required_if:status,published',
+            'content' => 'required_if:status,published',
+            'status' => 'required|in:draft,published',
+            'img' => 'required_if:status,published',
         ]);
-
-        $article = Article::create([
+        
+        Article::create([
             'title' => ucfirst($request->title),
             'content' => $request->content,
             'status' => $request->status, 
@@ -79,19 +80,50 @@ class ArticleController extends Controller
     }
 
     /**
+     * Publish the specified resource.
+     */
+    public function publish(string $id)
+    {
+        Article::where('id', $id)->update([
+            'status' => 'published'
+        ]);
+
+        return redirect()->route('admin.articles');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit(string $id)
     {
-        //
+        $article = Article::where('id', $id)->firstOrFail();
+
+        return view('admin.article_edit', [
+            'article' => $article
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'string',
+            'status' => 'required|in:draft,published'
+        ]);
+
+        // dd($request->all());
+
+        Article::where('id',$id)->update([
+            'title' => ucfirst($request->title),
+            'content' => $request->content,
+            'status' => $request->status, 
+            'img_path' => '',
+        ]);
+
+        return redirect()->route('admin.articles');
     }
 
     /**

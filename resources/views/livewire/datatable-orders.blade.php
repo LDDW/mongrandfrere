@@ -13,9 +13,9 @@
     </x-slot>
     @if (count($orders) > 0)
         <x-slot name="thead">
-            <th class="w-60 text-left">ID STRIPE</th>
-            <th class="w-32 text-left">MONTANT</th>
-            <th class="w-60 text-left flex justify-between pr-4 cursor-pointer" wire:click="dateAsc">
+            <th class="w-60 text-left select-none">ID STRIPE</th>
+            <th class="w-32 text-left select-none">MONTANT</th>
+            <th class="w-60 text-left select-none flex justify-between pr-4 cursor-pointer" wire:click="dateAsc">
                 <span>DATE</span>
                 @if ($dateAsc)
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -28,14 +28,14 @@
                 @endif
                   
             </th>
-            <th class="w-96 text-left">FORMATION</th>
-            <th class="w-96 text-left">UTILISATEUR</th>
+            <th class="w-96 text-left select-none">FORMATION</th>
+            <th class="w-96 text-left select-none">UTILISATEUR</th>
         </x-slot>
         <x-slot name="tbody">
             @foreach ($orders as $i => $order)
                 <tr class="h-12 {{$i % 2 == 0 ? 'bg-gray-50' :''}} border-t border-gray-200 text-gray-900 flex flex-row">
                     <td class="w-60"><p class="truncate">{{ $order->stripe_id }}</p></td>
-                    <td class="w-32"><p class="truncate">{{ $order->amount }}</p></td>
+                    <td class="w-32"><p class="truncate">{{ $order->formation->price }}</p></td>
                     <td class="w-60"><p class="truncate">{{ $order->created_at }}</p></td>
                     <td class="w-96"><p class="truncate">{{ $order->formation->name }}</p></td>
                     <td class="w-96"><p class="truncate">{{ $order->user->email }}</p></td>

@@ -8,8 +8,13 @@
             <span>Retour</span>
         </a>
         <div class="flex items-center gap-4">
-            <x-datatable-button label="Publié l'article"  />
-            <x-datatable-button label="Éditer" color="gray" />
+            @if ($article->status === 'draft')
+                <form action="{{ Route('admin.article.publish', ['article' => $article->id]) }}" method="post">
+                    @csrf
+                    <x-datatable-button label="Publié l'article"/>
+                </form>
+            @endif
+            <a href="{{ Route('admin.article.edit', ['article' => $article->id]) }}"><x-datatable-button label="Éditer" color="gray"/></a>
             <form action="{{ Route('admin.article.destroy', ['article' => $article->id]) }}" method="post">
                 @csrf
                 @method('DELETE')

@@ -44,7 +44,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/admin/articles', [ArticleController::class, 'admin'])->name('admin.articles');
         Route::get('/admin/articles/create', [ArticleController::class, 'create'])->name('admin.article.create');
         Route::post('/admin/articles', [ArticleController::class, 'store'])->name('admin.article.store');
+        Route::post('/admin/articles/{article}', [ArticleController::class, 'publish'])->name('admin.article.publish');
         Route::get('/admin/articles/{article}', [ArticleController::class, 'preview'])->name('admin.article');
+        Route::get('/admin/articles/{article}/edit', [ArticleController::class, 'edit'])->name('admin.article.edit');
+        Route::put('/admin/articles/{article}', [ArticleController::class, 'update'])->name('admin.article.update');
         Route::delete('/admin/articles/{article}', [ArticleController::class, 'destroy'])->name('admin.article.destroy');
 
         // admin formations

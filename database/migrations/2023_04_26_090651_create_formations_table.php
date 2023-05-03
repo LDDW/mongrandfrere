@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->text('desc');
             $table->float('price')->nullable();
             $table->float('new_price')->nullable();

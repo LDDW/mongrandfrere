@@ -10,24 +10,35 @@
         <span>Retour</span>
     </a>
 
-    <h2 class="font-bold text-3xl mb-8">Création d'un nouvel article</h2>
-    
-    <form action="{{ Route('admin.article.store') }}" method="post" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
+    <h2 class="font-bold text-3xl mb-8">Modification d'un article</h2>
+
+    <form action="{{ Route('admin.article.update', ['article' => $article->id]) }}" method="post" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
         @csrf
-        <x-input type="text" fieldName="title" name="title" label="Titre de l'article" class="col-span-full"/>
-        <x-input type="file" fieldName="img" name="img" label="Miniature de l'article" class="col-span-full"/>
-        <div class="col-span-full">
-            <x-select fieldName="status" name="status" width="full">
-                <option value="draft" selected>Brouillon</option>
-                <option value="published">Publié</option>
-            </x-select>
-        </div>
-        <div class="col-span-full">
+        @method('PUT')
+        @if ($errors->has('content'))
+                {{$errors->get('content') }}
+            @endif
+        <x-input type="text" fieldName="title" name="title" value="{{ $article->title }}" label="Titre de l'article" class="col-span-full"/>
+        <div class="col-span-full ">
             <div id="editor" class="bg-gray-50 h-[80vh]">
                 @php
-                    echo html_entity_decode(old('content'));
+                    echo html_entity_decode($article->content);
                 @endphp
             </div>
+            {{-- get error of textarea content --}}
+
+            
+        </div>
+        
+        <div class="col-span-full">
+            <x-select fieldName="status" name="status" width="full">
+                <option value="{{ $article->status }}" selected>{{ $article->status === 'draft' ? 'Brouillon' : 'Publié' }}</option>
+                @if ($article->status !== 'draft')
+                    <option value="draft">Brouillon</option>
+                @else
+                    <option value="published" selected>Publié</option>
+                @endif
+            </x-select>
         </div>
         <div class="col-span-full flex flex-row-reverse">
             <x-datatable-button label="Enregistrer" />
@@ -58,6 +69,9 @@
             });
             // add event listener on #editor to update textarea 
             quill.on('text-change', function(delta, oldDelta, source) {
+                document.getElementById("hidden-textarea").value = quill.root.innerHTML;
+            });
+            document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById("hidden-textarea").value = quill.root.innerHTML;
             });
         </script>
