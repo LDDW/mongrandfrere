@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -40,15 +41,27 @@ class ArticleController extends Controller
             'title' => 'required_if:status,published',
             'content' => 'required_if:status,published',
             'status' => 'required|in:draft,published',
-            'img' => 'required_if:status,published',
+            'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
-        Article::create([
-            'title' => ucfirst($request->title),
-            'content' => $request->content,
-            'status' => $request->status, 
-            'img_path' => '',
-        ]);
+
+        try {
+            // image upload 
+            if(isset($request->img)){
+                $image = $request->file('img');
+                $filename = $image->hashName();
+                $image->move(public_path('storage/images/articles'), $filename);
+            }
+            
+            // save article to database
+            Article::create([
+                'title' => ucfirst($request->title),
+                'content' => $request->content,
+                'status' => $request->status, 
+                'img_path' => isset($filename) ? $filename : '',
+            ]);
+        } catch (QueryException $qe) {
+            dd($qe->getMessage());
+        }
 
         return redirect()->route('admin.articles');
     }

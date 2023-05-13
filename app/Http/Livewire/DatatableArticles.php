@@ -19,15 +19,31 @@ class DatatableArticles extends Component
         'paginate' => ['except' => 25],
     ];
 
+    public bool $dateAsc = false;
+    public bool $statusAsc = false;
+
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    public function dateAsc(){
+        $this->dateAsc = !$this->dateAsc;
+    }
+
+    public function statusAsc(){
+        $this->statusAsc = !$this->statusAsc;
+    }
+
     public function render()
     {
+        $articles = Article::where('title','LIKE', '%' . $this->search . '%')
+            ->orderBy('created_at', $this->dateAsc ? 'asc' : 'desc')
+            ->orderBy('status', $this->statusAsc ? 'asc' : 'desc')
+            ->paginate($this->paginate);
+
         return view('livewire.datatable-articles', [
-            'articles' => Article::where('title','LIKE', '%' . $this->search . '%')->paginate($this->paginate),
+            'articles' => $articles,
         ]);
     }
 }

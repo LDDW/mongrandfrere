@@ -26,7 +26,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
                 @endif
-                  
             </th>
             <th class="w-96 text-left select-none">FORMATION</th>
             <th class="w-96 text-left select-none">UTILISATEUR</th>
@@ -35,7 +34,7 @@
             @foreach ($orders as $i => $order)
                 <tr class="h-12 {{$i % 2 == 0 ? 'bg-gray-50' :''}} border-t border-gray-200 text-gray-900 flex flex-row">
                     <td class="w-60"><p class="truncate">{{ $order->stripe_id }}</p></td>
-                    <td class="w-32"><p class="truncate">{{ $order->formation->price }}</p></td>
+                    <td class="w-32"><p class="truncate">{{ $order->formation->price }} €</p></td>
                     <td class="w-60"><p class="truncate">{{ $order->created_at }}</p></td>
                     <td class="w-96"><p class="truncate">{{ $order->formation->name }}</p></td>
                     <td class="w-96"><p class="truncate">{{ $order->user->email }}</p></td>

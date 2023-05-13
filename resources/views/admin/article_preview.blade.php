@@ -24,6 +24,8 @@
     </div>
 
     <div class="bg-white rounded-sm p-6 shadow-sm">
+        <img src="{{ asset('/storage/images/'.$article->img_name) }}" alt="Mon image">
+        {{ $article->img_name }}
         {{ $article->id }}<br/>
         {{ $article->title }}<br/>
     

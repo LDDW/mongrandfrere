@@ -12,7 +12,7 @@
 
     <h2 class="font-bold text-3xl mb-8">Création d'un nouvel article</h2>
     
-    <form action="{{ Route('admin.article.store') }}" method="post" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
+    <form action="{{ Route('admin.article.store') }}" method="post" enctype="multipart/form-data" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
         @csrf
         <x-input type="text" fieldName="title" name="title" label="Titre de l'article" class="col-span-full"/>
         <x-input type="file" fieldName="img" name="img" label="Miniature de l'article" class="col-span-full"/>
@@ -23,7 +23,7 @@
             </x-select>
         </div>
         <div class="col-span-full">
-            <div id="editor" class="bg-gray-50 h-[80vh]">
+            <div id="editor" class="bg-gray-50 h-[40vh]">
                 @php
                     echo html_entity_decode(old('content'));
                 @endphp
@@ -33,10 +33,10 @@
             <x-datatable-button label="Enregistrer" />
         </div>
 
-        <textarea name="content" id="hidden-textarea" cols="30" rows="10" class="hidden"></textarea>
+        <textarea name="content" id="hidden-textarea" value="" cols="30" rows="10" class="hidden"></textarea>
     </form>
 
-    <x-slot name="js">
+    @push('scripts')
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script>
             var quill = new Quill('#editor', {
@@ -61,5 +61,6 @@
                 document.getElementById("hidden-textarea").value = quill.root.innerHTML;
             });
         </script>
-    </x-slot>
+    @endpush
+       
 </x-admin-layout>

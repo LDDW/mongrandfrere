@@ -12,10 +12,13 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         @if (isset($css)){{ $css }}@endif
         <!-- Scripts -->
+        @toastScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
+        @livewireStyles
+    </head> 
     <body class="font-sans antialiased">
         <x-banner />
+        <livewire:toasts />
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu-admin')
@@ -27,6 +30,6 @@
 
         @stack('modals')
         @livewireScripts
-        @if (isset($js)){{ $js }}@endif
+        @stack('scripts')
     </body>
 </html>

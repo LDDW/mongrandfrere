@@ -14,8 +14,30 @@
     @if (count($articles) > 0)
         <x-slot name="thead">
             <th class="w-96 text-left">TITRE</th>
-            <th class="w-32 text-left">STATUS</th>
-            <th class="w-60 text-left">DATE DE CRÉATION</th>
+            <th class="w-32 text-left select-none flex justify-between pr-4 cursor-pointer hover:bg-slate-100" wire:click="statusAsc">
+                <span>STATUS</span>
+                @if ($statusAsc)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    </svg>
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                @endif
+            </th>
+            <th class="w-60 text-left select-none flex justify-between pr-4 cursor-pointer" wire:click="dateAsc">
+                <span>DATE DE CRÉATION</span>
+                @if ($dateAsc)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    </svg>
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                @endif
+            </th>
         </x-slot>
         <x-slot name="tbody">
             @foreach ($articles as $i => $art)

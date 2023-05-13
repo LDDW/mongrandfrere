@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formation;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class FormationController extends Controller
@@ -24,12 +26,19 @@ class FormationController extends Controller
         ]);
     }
 
+    public function preview(Formation $formation)
+    {
+        return view('admin.formation_preview', [
+            'formation' => $formation
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.formation');
     }
 
     /**
@@ -53,6 +62,17 @@ class FormationController extends Controller
      */
     public function edit(Formation $formation)
     {
-        //
+        return view('admin.formation_edit', [
+            'formation' => $formation
+        ]);
+    }
+
+    public function destroy(Formation $formation)
+    {
+        $formation->delete();
+
+        return view('admin.formations', [
+            'formations' => Formation::all()
+        ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('status')->default('draft');
-            $table->string('img_path');
+            $table->string('img_name');
             $table->timestamps();
         });
     }

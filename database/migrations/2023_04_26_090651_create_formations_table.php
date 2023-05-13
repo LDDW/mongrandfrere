@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('price')->nullable();
             $table->float('new_price')->nullable();
             $table->string('status')->default('brouillon');
+            $table->string('img_name')->nullable();
         });
     }
 

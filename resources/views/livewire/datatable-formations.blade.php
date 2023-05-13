@@ -8,24 +8,47 @@
                 @endif
             @endforeach
         </x-select>
-        <x-datatable-search wire:model.debounce.500ms="search" placeholder="Rechercher un article"/>
-        <a href="{{ Route('admin.article.create') }}" class="flex items-center justify-center rounded-sm px-4 min-w-fit h-10 text-[13px] font-semibold shadow-sm bg-blue-500 hover:bg-blue-600 text-white">Créer un article</a>
+        <x-datatable-search wire:model.debounce.500ms="search" placeholder="Rechercher une formation"/>
+        <a href="{{ Route('admin.formation.create') }}" class="flex items-center justify-center rounded-sm px-4 min-w-fit h-10 text-[13px] font-semibold shadow-sm bg-blue-500 hover:bg-blue-600 text-white">Créer une formation</a>
     </x-slot>
     @if (count($formations) > 0)
         <x-slot name="thead">
             <th class="w-96 text-left">TITRE</th>
-            <th class="w-32 text-left">STATUS</th>
-            <th class="w-60 text-left">DATE DE CRÉATION</th>
+            <th class="w-40 text-left select-none flex justify-between pr-4 cursor-pointer hover:bg-slate-100" wire:click="priceAsc">
+                <span>PRIX</span>
+                @if ($priceAsc)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    </svg>
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                @endif
+            </th>
+            <th class="w-32 text-left select-none flex justify-between pr-4 cursor-pointer hover:bg-slate-100" wire:click="statusAsc">
+                <span>STATUS</span>
+                @if ($statusAsc)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    </svg>
+                @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                @endif
+            </th>
         </x-slot>
         <x-slot name="tbody">
-            @foreach ($formations as $i => $art)
+            @foreach ($formations as $i => $formation)
                 <tr class="h-12 {{$i % 2 == 0 ? 'bg-gray-50' :''}} border-t border-gray-200 text-gray-900 flex flex-row">
-                    <td class="w-96"><p class="truncate">{{ $art->title }}</p></td>
-                    <td class="w-32"><p class="truncate">{{ $art->status === 'draft' ? 'Brouillon' : 'Publié' }}</p></td>
-                    <td class="w-60"><p class="truncate">{{ $art->created_at }}</p></td>
+                    <td class="w-96"><p class="truncate">{{ $formation->title }}</p></td>
+
+                    <td class="w-40"><p class="truncate">{{ $formation->price }} €</p></td>
+                    <td class="w-32"><p class="truncate">{{ $formation->status === 'draft' ? 'Brouillon' : 'Publié' }}</p></td>
                     <td class="w-full min-w-[128px] pl-2 h-12 flex items-center gap-2">
 
-                        <a href="{{ Route('admin.article', ['article' => $art->id]) }}">
+                        <a href="{{ Route('admin.formation', ['formation' => $formation->id]) }}">
                             <button class="text-gray-100 flex items-center justify-center w-12 h-8 rounded-sm bg-blue-500 hover:bg-blue-600" >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -34,7 +57,7 @@
                             </button>
                         </a>
 
-                        <a href="{{ Route('admin.article.edit', ['article' => $art->id]) }}">
+                        <a href="{{ Route('admin.formation.edit', ['formation' => $formation->id]) }}">
                             <button class="text-gray-100 flex items-center justify-center w-12 h-8 rounded-sm bg-green-400 hover:bg-green-500" >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
@@ -42,7 +65,7 @@
                             </button>
                         </a>
 
-                        <form action="{{ Route('admin.article.destroy', ['article' => $art->id]) }}" method="post">
+                        <form action="{{ Route('admin.formation.destroy', ['formation' => $formation->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="text-gray-100 flex items-center justify-center w-12 h-8 rounded-sm bg-red-400 hover:bg-red-500" >

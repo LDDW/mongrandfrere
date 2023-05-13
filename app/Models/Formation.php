@@ -20,6 +20,7 @@ class Formation extends Model
         'price',
         'new_price',
         'status',
+        'img_name'
     ];
 
     public $timestamps = false;

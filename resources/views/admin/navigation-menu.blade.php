@@ -15,10 +15,10 @@
                     <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Tableau de bord') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('admin.articles') }}" :active="request()->routeIs('admin.articles', 'admin.article.create')">
+                    <x-nav-link href="{{ route('admin.articles') }}" :active="request()->routeIs('admin.articles', 'admin.article.create', 'admin.article.edit', 'admin.article')">
                         {{ __('Articles') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('admin.formations') }}" :active="request()->routeIs('admin.formations')">
+                    <x-nav-link href="{{ route('admin.formations') }}" :active="request()->routeIs('admin.formations', 'admin.formation.create', 'admin.formation.edit', 'admin.formation')">
                         {{ __('Formations') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users')">

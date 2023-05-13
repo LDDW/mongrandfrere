@@ -18,6 +18,6 @@ class Article extends Model
         'title',
         'content',
         'status',
-        'img_path',
+        'img_name',
     ];
 }
