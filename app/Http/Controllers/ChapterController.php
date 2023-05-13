@@ -5,6 +5,7 @@ use App\Models\Chapter;
 use App\Models\Formation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChapterController extends Controller
 {
@@ -35,6 +36,8 @@ class ChapterController extends Controller
             ];
         }
 
+        $backtrace = debug_backtrace()[0];
+
         try {
             
             Chapter::create([
@@ -44,8 +47,29 @@ class ChapterController extends Controller
                 'files' => json_encode($files),    
             ]);
 
+            // toast success for ui
+            toast()
+                ->success('Le chapitre a bien été créé !', 'Création réussie')
+                ->pushOnNextPage();
+            
+            // log success
+            Log::info('Chapter created', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+            ]);
+
         } catch (QueryException $qe) {
-            dd($qe->getMessage());
+            // toast error for ui
+            toast()
+                ->error('Le chapitre n\'a pas pu être créé !', 'Création échouée')
+                ->pushOnNextPage();
+
+            // log error
+            Log::error('Error with chapter creation', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+                'error' => $qe,
+            ]);
         }
 
         return redirect()->route('admin.formation.edit', $formation);

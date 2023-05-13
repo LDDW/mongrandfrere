@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -44,7 +44,8 @@ class ArticleController extends Controller
             'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        dd($request);
+        $backtrace = debug_backtrace()[0];
+
         try {
             // image upload 
             if(isset($request->img)){
@@ -61,12 +62,29 @@ class ArticleController extends Controller
                 'img_name' => isset($filename) ? $filename : '',
             ]);
 
+            // toast success for ui
             toast()
                 ->success('L\'article a bien été créé !', 'Création réussie')
                 ->pushOnNextPage();
+            
+            // log success
+            Log::info('Article created', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+            ]);
 
         } catch (QueryException $qe) {
-            dd($qe->getMessage());
+            // toast error for ui
+            toast()
+                ->danger('L\'article n\'a pas été créé !', 'Erreur')
+                ->pushOnNextPage();
+
+            // log error 
+            Log::error('Erreur avec la création de l\'article', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $qe,
+            ]);
         }
 
         return redirect()->route('admin.articles');
@@ -103,9 +121,38 @@ class ArticleController extends Controller
      */
     public function publish(string $id)
     {
-        Article::where('id', $id)->update([
-            'status' => 'published'
-        ]);
+        $backtrace = debug_backtrace()[0];
+
+        try {
+            // update article status to published
+            Article::where('id', $id)->update([
+                'status' => 'published'
+            ]);
+            
+            // toast success for ui
+            toast()
+                ->success('L\'article a bien été publié !', 'Publication réussite')
+                ->pushOnNextPage();
+            
+            // log success
+            Log::info('Article published', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+            ]);
+
+        } catch (QueryException $qe) {
+            // toast error for ui
+            toast()
+                ->danger('L\'article n\'a pas été publié !', 'Erreur')
+                ->pushOnNextPage();
+
+            // log error 
+            Log::error('Erreur avec la publication de l\'article', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $qe,
+            ]);
+        }
 
         return redirect()->route('admin.articles');
     }
@@ -133,14 +180,41 @@ class ArticleController extends Controller
             'status' => 'required|in:draft,published'
         ]);
 
-        // dd($request->all());
+        $backtrace = debug_backtrace()[0];
 
-        Article::where('id',$id)->update([
-            'title' => ucfirst($request->title),
-            'content' => $request->content,
-            'status' => $request->status, 
-            'img_path' => '',
-        ]);
+        try {
+            // update article
+            Article::where('id',$id)->update([
+                'title' => ucfirst($request->title),
+                'content' => $request->content,
+                'status' => $request->status, 
+                'img_path' => '',
+            ]);
+
+            // toast success for ui
+            toast()
+                ->success('L\'article a bien été mise à jour !', 'Mise à jour réussite')
+                ->pushOnNextPage();
+            
+            // log success
+            Log::info('Article updated', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+            ]);
+
+        } catch (QueryException $qe) {
+            // toast error for ui
+            toast()
+                ->danger('L\'article n\'a pas été mise à jour !', 'Erreur')
+                ->pushOnNextPage();
+
+            // log error 
+            Log::error('Erreur avec la mise à jour de l\'article', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $qe,
+            ]);
+        }
 
         return redirect()->route('admin.articles');
     }
@@ -150,7 +224,36 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        Article::destroy($article->id);
+        $backtrace = debug_backtrace()[0];
+
+        try {
+            // delete article
+            Article::destroy($article->id);
+
+            // toast success for ui
+            toast()
+                ->success('L\'article a bien été supprimé !', 'Suppression réussite')
+                ->pushOnNextPage();
+
+            // log success
+            Log::info('Article deleted', [
+                'file' => $backtrace['file'],
+                'line' => $backtrace['line'],
+            ]);
+
+        } catch (QueryException $qe) {
+            // toast error for ui
+            toast()
+                ->danger('L\'article n\'a pas été supprimé !', 'Erreur')
+                ->pushOnNextPage();
+
+            // log error 
+            Log::error('Erreur avec la suppression de l\'article', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $qe,
+            ]);
+        }
         return redirect()->route('admin.articles');
     }
 }
