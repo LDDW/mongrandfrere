@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('desc');
+            $table->text('content');
             $table->json('files')->nullable();
             $table->foreignId('formation_id')->constrained('formations')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->timestamps();
         });
     }
 

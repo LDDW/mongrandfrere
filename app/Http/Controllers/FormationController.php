@@ -41,6 +41,45 @@ class FormationController extends Controller
         return view('admin.formation');
     }
 
+    public function store(Request $request) {
+        $request->validate([
+            'title' => 'required_if:status,published|string|min:3',
+            'description' => 'required_if:status,published|string|min:10',
+            'price' => 'required_if:status,published|numeric|min:0',
+            'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
+            'status' => 'required|in:draft,published'
+        ]);
+
+        // image upload 
+        if(isset($request->img)){
+            $image = $request->file('img');
+            $filename = $image->hashName();
+            $image->move(public_path('storage/images/articles'), $filename);
+        }
+
+        try {
+            Formation::create([
+                'title' => $request->title,
+                'desc' => $request->description,
+                'price' => $request->price,
+                'img' => isset($filename) ? $filename : '',
+                'status' => $request->status,
+            ]);
+
+            // toast message
+            toast()
+                ->success('Formation ajoutée avec succès !', 'Ajouté')
+                ->pushOnNextPage();
+
+        } catch (QueryException $qe) {
+            dd($qe->getMessage());
+        }
+
+        return view('admin.formations', [
+            'formations' => Formation::all()
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -63,7 +102,8 @@ class FormationController extends Controller
     public function edit(Formation $formation)
     {
         return view('admin.formation_edit', [
-            'formation' => $formation
+            'formation' => $formation,
+            'chapters' => Formation::find($formation->id)->chapter()->get()
         ]);
     }
 

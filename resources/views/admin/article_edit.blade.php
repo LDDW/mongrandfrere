@@ -16,8 +16,8 @@
         @csrf
         @method('PUT')
         @if ($errors->has('content'))
-                {{$errors->get('content') }}
-            @endif
+            {{$errors->get('content') }}
+        @endif
         <x-input type="text" fieldName="title" name="title" value="{{ $article->title }}" label="Titre de l'article" class="col-span-full"/>
         <div class="col-span-full ">
             <div id="editor" class="bg-gray-50 h-[40vh]">

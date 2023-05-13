@@ -18,5 +18,12 @@ class Chapter extends Model
         'title',
         'desc',
         'formation_id',
+        'content',
+        'files',
     ];
+
+    public function formation()
+    {
+        return $this->belongsTo(Formation::class, 'formation_id');
+    }
 }

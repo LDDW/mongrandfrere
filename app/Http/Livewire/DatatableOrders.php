@@ -32,10 +32,6 @@ class DatatableOrders extends Component
 
     public function render()
     {
-        toast()
-            ->info('Notification from the backend...', 'The Title')
-            ->push();
-
         $orders = Order::where('id','LIKE', '%' . $this->search . '%')
             ->orderBy('created_at', $this->dateAsc ? 'asc' : 'desc')
             ->with('user')

@@ -44,6 +44,7 @@ class ArticleController extends Controller
             'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        dd($request);
         try {
             // image upload 
             if(isset($request->img)){
@@ -57,8 +58,13 @@ class ArticleController extends Controller
                 'title' => ucfirst($request->title),
                 'content' => $request->content,
                 'status' => $request->status, 
-                'img_path' => isset($filename) ? $filename : '',
+                'img_name' => isset($filename) ? $filename : '',
             ]);
+
+            toast()
+                ->success('L\'article a bien été créé !', 'Création réussie')
+                ->pushOnNextPage();
+
         } catch (QueryException $qe) {
             dd($qe->getMessage());
         }

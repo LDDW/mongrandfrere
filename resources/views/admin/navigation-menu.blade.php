@@ -18,7 +18,7 @@
                     <x-nav-link href="{{ route('admin.articles') }}" :active="request()->routeIs('admin.articles', 'admin.article.create', 'admin.article.edit', 'admin.article')">
                         {{ __('Articles') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('admin.formations') }}" :active="request()->routeIs('admin.formations', 'admin.formation.create', 'admin.formation.edit', 'admin.formation')">
+                    <x-nav-link href="{{ route('admin.formations') }}" :active="request()->routeIs('admin.formations', 'admin.formation.create', 'admin.formation.edit', 'admin.formation', 'admin.formation.chapter.create', 'admin.formation.chapter.edit')">
                         {{ __('Formations') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users')">
