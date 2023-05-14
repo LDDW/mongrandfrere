@@ -64,13 +64,13 @@ class ArticleController extends Controller
 
             // toast success for ui
             toast()
-                ->success('L\'article a bien été créé !', 'Création réussie')
+                ->success('L\'article a bien été créé !', 'Création réussite')
                 ->pushOnNextPage();
             
             // log success
             Log::info('Article created', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
             ]);
 
         } catch (QueryException $qe) {
@@ -83,7 +83,7 @@ class ArticleController extends Controller
             Log::error('Erreur avec la création de l\'article', [
                 'class' => $backtrace['class'],
                 'function' => $backtrace['function'],
-                'error' => $qe,
+                'error' => $qe->getMessage(),
             ]);
         }
 
@@ -136,8 +136,8 @@ class ArticleController extends Controller
             
             // log success
             Log::info('Article published', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
             ]);
 
         } catch (QueryException $qe) {
@@ -150,7 +150,7 @@ class ArticleController extends Controller
             Log::error('Erreur avec la publication de l\'article', [
                 'class' => $backtrace['class'],
                 'function' => $backtrace['function'],
-                'error' => $qe,
+                'error' => $qe->getMessage(),
             ]);
         }
 
@@ -198,8 +198,8 @@ class ArticleController extends Controller
             
             // log success
             Log::info('Article updated', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
             ]);
 
         } catch (QueryException $qe) {
@@ -212,7 +212,7 @@ class ArticleController extends Controller
             Log::error('Erreur avec la mise à jour de l\'article', [
                 'class' => $backtrace['class'],
                 'function' => $backtrace['function'],
-                'error' => $qe,
+                'error' => $qe->getMessage(),
             ]);
         }
 
@@ -237,8 +237,8 @@ class ArticleController extends Controller
 
             // log success
             Log::info('Article deleted', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
             ]);
 
         } catch (QueryException $qe) {
@@ -251,7 +251,7 @@ class ArticleController extends Controller
             Log::error('Erreur avec la suppression de l\'article', [
                 'class' => $backtrace['class'],
                 'function' => $backtrace['function'],
-                'error' => $qe,
+                'error' => $qe->getMessage(),
             ]);
         }
         return redirect()->route('admin.articles');

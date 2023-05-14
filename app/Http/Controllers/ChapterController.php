@@ -54,8 +54,8 @@ class ChapterController extends Controller
             
             // log success
             Log::info('Chapter created', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
             ]);
 
         } catch (QueryException $qe) {
@@ -66,9 +66,9 @@ class ChapterController extends Controller
 
             // log error
             Log::error('Error with chapter creation', [
-                'file' => $backtrace['file'],
-                'line' => $backtrace['line'],
-                'error' => $qe,
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $qe->getMessage(),
             ]);
         }
 
