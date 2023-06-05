@@ -24,13 +24,13 @@
             @livewire('navigation-menu')
 
             <!-- Page Content -->
-            <main class="px-4">
+            <main class="px-4 bg-[#FFF1DC]">
                 {{ $slot }}
             </main>
-            <footer class="w-full bg-[#57C5B6]">
-                <div class="pb-3 pt-14 px-6 lg:px-20 xl:px-44 md:flex md:justify-between">
+            <footer class="w-full bg-[#57C5B6] px-6 lg:px-20 xl:px-44">
+                <div class="pb-3 pt-14 md:flex md:justify-between max-w-7xl mx-auto">
 
-                    <div class="w-44 mb-5 mx-auto md:m-0">
+                    <div class="w-44 mb-5 mx-auto max-w-7xl md:m-0">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
                             <defs>
@@ -125,7 +125,7 @@
                     </div>
 
                 </div>
-                <hr class="border-[0.5px] border-[#DCF2ED]">
+                <hr class="border-[0.5px] border-[#DCF2ED] max-w-7xl mx-auto">
                 <div class="w-full lg:flex lg:items-center lg:justify-center lg:gap-2 text-sm text-[#DCF2ED] pt-3 pb-8 px-6 text-center lg:text-left">
                     <a href="" class="block underline lg:underline-offset-0">Conditions générales de vente</a>
                     <span class="hidden lg:block">-</span>
