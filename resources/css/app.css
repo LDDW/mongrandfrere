@@ -6,6 +6,10 @@
     display: none;
 }
 
+section {
+    @apply max-w-7xl mx-auto grid grid-cols-1 gap-4 py-10;
+}
+
 /* ========================= TABLE ========================= */
 .table {
     @apply block w-full overflow-x-scroll overflow-y-hidden text-sm;
