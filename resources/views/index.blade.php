@@ -1,6 +1,5 @@
 <x-app-layout>
     <section>
-        
         <div>
             <img src="/img/home_img_1.png" alt="" class="w-4/5 mx-auto">
             <div class="bg-white p-4 rounded-xl w-3/5 mx-auto">
@@ -36,31 +35,47 @@
                 <p>Conception de sa lettre de motivation</p>
             </div>
         </div>
-
     </section>
-    <section>
-        <div class="relative">
-            <img src="/img/home_img_2.png" alt="" class="w-7/12">
-            <img src="/img/home_img_3.png" alt="" class="w-7/12 absolute right-0 -translate-y-1/2">
+
+    <section class="lg:flex lg:gap-4">
+        <div class="relative lg:flex lg:gap-4 lg:shrink-0">
+            <img src="/img/home_img_2.png" alt="" class="w-7/12 lg:w-1/4">
+            <img src="/img/home_img_3.png" alt="" class="w-7/12 absolute right-0 -translate-y-1/2 lg:relative lg:w-1/4 lg:-translate-y-0">
         </div>
         <div class="relative">
             <img src="/img/home_img_4.png" alt="" class="w-7/12">
             <img src="/img/home_img_5.png" alt="" class="w-7/12 absolute right-0 -translate-y-1/2">
         </div>
     </section>
+
     <section>
-        <img src="/img/home_img_6.png" alt="" class="z-10">
-        <div>
-            <p><span>2</span>ans d'expérience dans la formation</p>
+        <div class="z-10">
+            <img src="/img/home_img_6.png" alt="" class="w-4/6">
+            <div class="bg-[#57C5B6] p-4 rounded-xl text-white">
+                <p class="font-medium"><span class="block text-4xl font-bold">6</span>ans d'expérience dans la formation</p>
+            </div>
         </div>
-        <div>
-            <p><span>+300</span>étudiants formés</p>
+        <div class="bg-white p-4 rounded-xl text-[#57C5B6]">
+            <p class="font-medium"><span class="block text-4xl font-bold">+300</span>étudiants formés</p>
         </div>
-        <div>
-            <p><span>90%</span>d'entre eux sont des étrangers</p>
+        <div class="bg-[#57C5B6] p-4 rounded-xl text-white">
+            <p class="font-medium"><span class="block text-4xl font-bold">90%</span>d'entre eux sont des étrangers</p>
         </div>
-        <div>
-            <p><span>96%</span>de taux de réussite</p>
+        <div class="bg-white p-4 rounded-xl text-[#57C5B6]">
+            <p class="font-medium"><span class="block text-4xl font-bold">96%</span>de taux de réussite</p>
         </div>
     </section>
+
+    <section>
+        <div class="bg-[#57C5B6] rounded-xl overflow-hidden">
+            <div class="p-8">
+                <h2 class="text-center text-white font-bold mb-4 text-lg">Une dernière question ?</h2>
+                <p class="text-white text-center">Contactez-nous dès maintenant pour voir ensemble vos besoins et vous accompagner au mieux dans votre démarche.</p>
+                <a href="" class="mt-4 block text-center">
+                    <button class="py-2.5 px-4 bg-white rounded-xl">Contactez-nous !</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
 </x-app-layout>

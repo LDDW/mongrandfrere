@@ -126,20 +126,10 @@
         <div class="py-2 border-t border-gray-200">
             @if (Route::has('login'))
                 @auth
-                    <div class="flex items-center px-4">
-                        <div class="shrink-0 mr-3">
-                            <img class="h-10 w-10 rounded-full object-cover" src="{{ 'https://ui-avatars.com/api/?name='. substr(Auth::user()->lastname, 0, 1) . substr(Auth::user()->firstname, 0, 1) .'&color=57C5B6&background=EBF4FF' }}" alt="{{ Auth::user()->name }}" />
-                        </div>
-                        <div>
-                            <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                        </div>
-                    </div>
-        
                     <div class="mt-3 space-y-1">
                         <!-- Account Management -->
                         <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                            {{ __('Profile') }}
+                            {{ __('Mon compte') }}
                         </x-responsive-nav-link>
         
                         <!-- Authentication -->
@@ -147,7 +137,7 @@
                             @csrf
                             <x-responsive-nav-link href="{{ route('logout') }}"
                                         @click.prevent="$root.submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Déconnexion') }}
                             </x-responsive-nav-link>
                         </form>
                     </div>
