@@ -6,9 +6,12 @@ use App\Models\Article;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class ArticleController extends Controller
 {
+    use WireToast;
+
     /**
      * Display a listing of the resource.
      */
@@ -188,7 +191,7 @@ class ArticleController extends Controller
                 'title' => ucfirst($request->title),
                 'content' => $request->content,
                 'status' => $request->status, 
-                'img_path' => '',
+                'img_name' => isset($filename) ? $filename : '',
             ]);
 
             // toast success for ui

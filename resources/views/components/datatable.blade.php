@@ -1,4 +1,7 @@
 <div {{ $attributes->merge(['class' => 'border border-gray-200 h-min bg-white shadow-sm rounded-sm overflow-hidden']) }}>
+    @if (isset($modal))
+        {{ $modal }}
+    @endif
     @if (isset($header))
         <div class="border-b border-gray-200 font-normal flex gap-3 justify-between w-full p-3 shrink-0 text-gray-700">
             {{ $header }}

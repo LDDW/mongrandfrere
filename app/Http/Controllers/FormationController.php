@@ -6,9 +6,12 @@ use App\Models\Formation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class FormationController extends Controller
 {
+    use WireToast;
+
     /**
      * Display a listing of the resource.
      */
@@ -55,7 +58,7 @@ class FormationController extends Controller
         } catch (QueryException $qe) {
             // toast error for ui
             toast()
-                ->error('La formation n\'a pas pu être publiée !', 'Publication échouée')
+                ->danger('La formation n\'a pas pu être publiée !', 'Publication échouée')
                 ->pushOnNextPage();
             
             // log error
@@ -120,7 +123,7 @@ class FormationController extends Controller
         } catch (QueryException $qe) {
             // toast error for ui
             toast()
-                ->error('La formation n\'a pas pu être créé !', 'Création échouée')
+                ->danger('La formation n\'a pas pu être créé !', 'Création échouée')
                 ->pushOnNextPage();
             
             // log error
@@ -167,9 +170,9 @@ class FormationController extends Controller
     {
         $request->validate([
             'title' => 'required_if:status,published|string|min:3',
-            'description' => 'required_if:status,published|string|min:10',
+            'content' => 'required_if:status,published|string|min:10',
             'price' => 'required_if:status,published|numeric|min:0',
-            'img' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:draft,published'
         ]);
 
@@ -185,9 +188,9 @@ class FormationController extends Controller
 
             $formation->update([
                 'title' => $request->title,
-                'desc' => $request->description,
+                'desc' => $request->content,
                 'price' => $request->price,
-                'img' => isset($filename) ? $filename : $formation->img,
+                'img_name' => isset($filename) ? $filename : $formation->img,
                 'status' => $request->status,
             ]);
 
@@ -205,7 +208,7 @@ class FormationController extends Controller
         } catch (QueryException $qe) {
             // toast error for ui
             toast()
-                ->error('La formation n\'a pas pu être modifié !', 'Modification échouée')
+                ->danger('La formation n\'a pas pu être modifié !', 'Modification échouée')
                 ->pushOnNextPage();
             
             // log error
@@ -216,9 +219,7 @@ class FormationController extends Controller
             ]);
         }
 
-        return view('admin.formations', [
-            'formations' => Formation::all()
-        ]);
+        return redirect()->route('admin.formations');
     }
 
     public function destroy(Formation $formation)
@@ -242,7 +243,7 @@ class FormationController extends Controller
         } catch (QueryException $qe) {
             // toast message for ui
             toast()
-                ->error('La formation n\'a pas été supprimé !', 'Erreur')
+                ->danger('La formation n\'a pas été supprimé !', 'Erreur')
                 ->pushOnNextPage();
 
             // log error
@@ -253,8 +254,6 @@ class FormationController extends Controller
             ]);
         }
 
-        return view('admin.formations', [
-            'formations' => Formation::all()
-        ]);
+        return redirect()->route('admin.formations');
     }
 }

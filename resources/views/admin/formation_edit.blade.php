@@ -13,9 +13,21 @@
     <h2 class="font-bold text-3xl mb-8">Modification d'une formation</h2>
 
     <div class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
-        <form action="{{ Route('admin.article.update', ['article' => $formation->id]) }}" method="post" class="m-0 grid grid-cols-12 gap-4 col-span-full">
+        <form action="{{ Route('admin.formation.update', ['formation' => $formation->id]) }}" method="post" class="m-0 grid grid-cols-12 gap-4 col-span-full">
             @csrf
             @method('PUT')
+
+            @if ($errors->any())
+                <div class="col-span-full">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <ul class="space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
     
             <x-input type="text" value="{{ $formation->title }}" fieldName="title" name="title" label="Titre de la formation" class="col-span-9"/>
             <x-input type="number" value="{{ $formation->price }}" min="1" fieldName="price" name="price" label="Prix de la formation" class="col-span-3"/>
@@ -30,7 +42,7 @@
                     @endif
                 </x-select>
             </div>
-            <textarea name="content" id="hidden-textarea" cols="30" rows="10" class="hidden"></textarea>
+            <textarea name="content" id="hidden-textarea" cols="30" rows="10" class="hidden">{{ $formation->desc }}</textarea>
     
             <div class="col-span-full ">
                 <div id="editor" class="bg-gray-50 h-[40vh]">
@@ -45,11 +57,14 @@
         </form>
     
         <h2 class="col-span-full text-xl">Chapitres</h2>
-        @foreach ($chapters as $chapter)
-            <div class="col-span-full">{{ $chapter }}</div>
+        @foreach ($chapters as $index => $chapter)
+            <a href="{{ Route('admin.formation.chapter.edit', ['formation' => $formation->id, 'chapter' => $chapter->id]) }}" class="col-span-full">
+                #{{$index .' '. $chapter->title }}
+            </a>
+            {{-- <div class="col-span-full">{{ $chapter }}</div> --}}
         @endforeach
         <a href="{{ Route('admin.formation.chapter.create', ['formation' => $formation->id]) }}" class="col-span-full">
-                <x-datatable-button label="Ajouter un chapitre" />
+            <x-datatable-button label="Ajouter un chapitre" />
         </a>
     </div>
 

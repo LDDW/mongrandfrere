@@ -23,9 +23,11 @@
         data-field-name="{{ $fieldName }}"
         @class(["w-full px-3 py-2.5 text-sm border-[0.5px] rounded-sm border-gray-300 outline-none focus:border-black transition-all $color input_$fieldName ", "border-red-400" => $errors->has($fieldName)])
         autocomplete="off"
-        @if ($attributes->get('name') !== null)
+
+        @if ($attributes->get('value') === null)
             value="{{ old($attributes->get('name')) }}"
         @endif
+
         @foreach ($attributeMap as $attributeName => $htmlAttributeName)
             @if ($attributes->get($attributeName))
                 {{ $htmlAttributeName }}="{{ $attributes->get($attributeName) }}"

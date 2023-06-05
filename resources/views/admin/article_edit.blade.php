@@ -15,10 +15,19 @@
     <form action="{{ Route('admin.article.update', ['article' => $article->id]) }}" method="post" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
         @csrf
         @method('PUT')
-        @if ($errors->has('content'))
-            {{$errors->get('content') }}
+        @if ($errors->any())
+            <div class="col-span-full">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <ul class="space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         @endif
         <x-input type="text" fieldName="title" name="title" value="{{ $article->title }}" label="Titre de l'article" class="col-span-full"/>
+        <x-input type="file" fieldName="img" name="img" label="Miniature de l'article" class="col-span-full"/>
         <div class="col-span-full ">
             <div id="editor" class="bg-gray-50 h-[40vh]">
                 @php
@@ -42,7 +51,7 @@
             <x-datatable-button label="Enregistrer" />
         </div>
 
-        <textarea name="content" id="hidden-textarea" cols="30" rows="10" class="hidden"></textarea>
+        <textarea name="content" id="hidden-textarea" cols="30" rows="10" class="hidden">{{ $article->content }}</textarea>
     </form>
 
     @push('scripts')

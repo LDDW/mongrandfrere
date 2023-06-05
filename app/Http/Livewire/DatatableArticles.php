@@ -14,13 +14,15 @@ class DatatableArticles extends Component
     public int $paginate = 25;
     public string $search = '';
 
+    public bool $dateAsc = false;
+    public bool $statusAsc = false;
+    public bool $confirmingDeletion = false;
+    public int $IdBeingDeleted = 0;
+
     protected $queryString = [
         'search' => ['except' => ''],
         'paginate' => ['except' => 25],
     ];
-
-    public bool $dateAsc = false;
-    public bool $statusAsc = false;
 
     public function updatingSearch()
     {
@@ -45,5 +47,11 @@ class DatatableArticles extends Component
         return view('livewire.datatable-articles', [
             'articles' => $articles,
         ]);
+    }
+
+    public function deleteModal($id)
+    {
+        $this->confirmingDeletion = true;
+        $this->IdBeingDeleted = $id;
     }
 }

@@ -15,6 +15,17 @@
 
     <form action="{{ Route('admin.formation.chapter.store', ['formation' => $formation->id]) }}" enctype="multipart/form-data" method="post" class="m-0 grid grid-cols-12 gap-4 bg-white shadow-sm rounded-sm p-6">
         @csrf
+        @if ($errors->any())
+            <div class="col-span-full">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <ul class="space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
         {{-- title --}}
         <x-input type="text" fieldName="title" name="title" label="Titre du chapitre" class="col-span-full"/>
         

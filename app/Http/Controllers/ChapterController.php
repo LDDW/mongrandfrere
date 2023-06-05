@@ -6,9 +6,12 @@ use App\Models\Formation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class ChapterController extends Controller
 {
+    use WireToast;
+
     public function create(Formation $formation)
     {
         return view('admin.chapter', [
@@ -61,7 +64,7 @@ class ChapterController extends Controller
         } catch (QueryException $qe) {
             // toast error for ui
             toast()
-                ->error('Le chapitre n\'a pas pu être créé !', 'Création échouée')
+                ->danger('Le chapitre n\'a pas pu être créé !', 'Création échouée')
                 ->pushOnNextPage();
 
             // log error
@@ -75,17 +78,18 @@ class ChapterController extends Controller
         return redirect()->route('admin.formation.edit', $formation);
     }
 
-    public function edit(Formation $formation)
+    public function edit(Formation $formation, Chapter $chapter)
     {
-        return view('admin.formation', [
-            'formation' => $formation
+        return view('admin.chapter_edit', [
+            'formation' => $formation,
+            'chapter' => $chapter
         ]);
     }
 
     public function update(Request $request, Formation $formation, Chapter $chapter)
     {
         $request->validate([
-
+            
         ]);
 
         return redirect()->route('admin.formation.edit', $formation);

@@ -18,6 +18,9 @@ class DatatableFormations extends Component
     public bool $statusAsc = false;
     public bool $priceAsc = false;
 
+    public bool $confirmingDeletion = false;
+    public int $IdBeingDeleted = 0;
+
     protected $queryString = [
         'search' => ['except' => ''],
         'paginate' => ['except' => 25],
@@ -46,5 +49,11 @@ class DatatableFormations extends Component
         return view('livewire.datatable-formations', [
             'formations' => $formations,
         ]);
+    }
+
+    public function deleteModal($id)
+    {
+        $this->confirmingDeletion = true;
+        $this->IdBeingDeleted = $id;
     }
 }
