@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="border-b border-gray-100 bg-[#FFF1DC] px-6 lg:px-20 xl:px-44 lg:py-5 sticky top-0 z-50">
+<nav x-data="{ open: false }" class="border-gray-100 bg-[#FFF1DC] px-6 lg:px-20 xl:px-44 lg:py-5 sticky top-0 z-50">
     <!-- Primary Navigation Menu -->
     <div class="mx-auto lg:px-8 lg:border lg:border-[#57C5B6] lg:rounded-3xl max-w-7xl">
         <div class="flex justify-between h-16">
