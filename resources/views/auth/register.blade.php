@@ -6,23 +6,23 @@
 
             <h1 class="text-center font-bold text-2xl mb-10">Inscription</h1>
 
-            <div>
+            <div class="mb-6">
                 <x-input type="text" fieldName="lastname" label="Nom" name="lastname" required autofocus autocomplete="lastname" placeholder="Entrez votre nom" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 mb-6">
                 <x-input type="text" fieldName="firstname" label="Prénom" name="firstname" required autofocus autocomplete="firstname" placeholder="Entrez votre prénom" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 mb-6">
                 <x-input type="email" fieldName="email" label="E-mail" name="email" required autofocus autocomplete="email" placeholder="Entrez votre e-mail" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 mb-6">
                 <x-input type="password" fieldName="password" label="Mot de passe" name="password" required autofocus autocomplete="password" placeholder="Entrez votre mot de passe" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 mb-6">
                 <x-input type="password" fieldName="password_confirmation" label="Confirmation du mot de passe" name="password_confirmation" required autofocus autocomplete="password_confirmation" placeholder="Confirmez votre mot de passe" />
             </div>
 
