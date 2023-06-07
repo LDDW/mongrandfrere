@@ -53,6 +53,10 @@ section {
     @apply text-2xl font-semibold mb-2;
 }
 
-.legal p {
+.legal p, .legal ul {
     @apply text-base mb-8 text-justify;
+}
+
+.legal li {
+    @apply mb-3;
 }

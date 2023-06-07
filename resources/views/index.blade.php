@@ -1,4 +1,5 @@
 <x-app-layout>
+    @include('cookie-consent::index')
     <section>
         <div data-aos="zoom-in-up" class="md:max-w-lg md:mx-auto lg:grid lg:grid-cols-2 lg:max-w-4xl">
             <img src="/img/home_img_1.png" alt="" class="w-4/5 mx-auto lg:w-full">

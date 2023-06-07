@@ -106,6 +106,8 @@
         <span class="hidden lg:block">-</span>
         <a href="{{ route('privacy.policy.show') }}" class="block underline">Politique de confidentialité</a>
         <span class="hidden lg:block">-</span>
+        <a href="{{ route('cookies.policy.show') }}" class="block underline">Politique des cookies</a>
+        <span class="hidden lg:block">-</span>
         <p>Copyright 2023 MonGrandFrère</p>
     </div>
 </footer>

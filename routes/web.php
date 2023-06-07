@@ -92,5 +92,9 @@ Route::get('/politique-de-confidentialité', function () {
     return view('policy');
 })->name('privacy.policy.show');
 
+Route::get('/politique-de-cookies', function () {
+    return view('cookie');
+})->name('cookies.policy.show');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
