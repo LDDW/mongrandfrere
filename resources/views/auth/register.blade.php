@@ -26,23 +26,23 @@
                 <x-input type="password" fieldName="password_confirmation" label="Confirmation du mot de passe" name="password_confirmation" required autofocus autocomplete="password_confirmation" placeholder="Confirmez votre mot de passe" />
             </div>
 
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
 
-                            <div class="ml-2">
+            <div class="mt-4">
+                <x-label for="terms">
+                    <div class="flex items-center">
+                        <x-checkbox name="terms" id="terms" required />
 
-                                {!! __('J\'accepte les :terms_of_service et la :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Conditions d\'utilisation').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Politique de confidentialité').'</a>',
-                                ]) !!}
-                            </div>
+                        <div class="ml-2">
+
+                            {!! __('J\'accepte les :terms_of_service et la :privacy_policy', [
+                                    'terms_of_service' => '<a target="_blank" href="'.route('terms.use.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Conditions générales d\'utilisation').'</a>',
+                                    'privacy_policy' => '<a target="_blank" href="'.route('privacy.policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Politique de confidentialité').'</a>',
+                            ]) !!}
                         </div>
-                    </x-label>
-                </div>
-            @endif
+                    </div>
+                </x-label>
+            </div>
+
 
             <x-datatable-button label="Inscription" class="w-full mt-8 mb-4 rounded-xl" color="mgf"/>
             <p class="text-sm text-center">Vous avez un compte ? <a href="{{ route('login') }}" class="underline text-[#57C5B6]">Connexion</a></p>

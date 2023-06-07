@@ -1,14 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+            {{ __('Il s\'agit d\'une zone sécurisée de l\'application. Veuillez confirmer votre mot de passe avant de continuer.') }}
         </div>
-
-        <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
@@ -18,9 +13,7 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-button class="ml-4">
-                    {{ __('Confirm') }}
-                </x-button>
+                <x-datatable-button label="Confirmer" class="w-full mt-8 mb-4 rounded-xl" color="mgf"/>
             </div>
         </form>
     </x-authentication-card>

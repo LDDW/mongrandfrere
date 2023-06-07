@@ -1,11 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        <h1 class="text-center font-bold text-2xl mb-10">Mot de passe oublié</h1>
+
+        <div class="mb-8 text-sm text-gray-600">
+            {{ __('Vous avez oublié votre mot de passe ? Pas de problème. Indiquez-nous votre adresse électronique et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra d\'en choisir un nouveau.') }}
         </div>
 
         @if (session('status'))
@@ -14,8 +13,6 @@
             </div>
         @endif
 
-        <x-validation-errors class="mb-4" />
-
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
@@ -23,11 +20,7 @@
                 <x-input type="email" fieldName="email" name="email" label="Email" required autofocus autocomplete="username" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
+            <x-datatable-button label="Lien de réinitialisation du mot de passe par courriel" class="w-full mt-8 mb-4 rounded-xl" color="mgf"/>
         </form>
     </x-authentication-card>
 </x-guest-layout>

@@ -44,3 +44,15 @@ section {
 .paginate_bar {
     @apply bg-gray-50 p-3 border-t border-gray-200 flex items-center justify-end;
 }
+
+.legal h1 {
+    @apply text-3xl font-semibold;
+}
+
+.legal h2 {
+    @apply text-2xl font-semibold mb-2;
+}
+
+.legal p {
+    @apply text-base mb-8 text-justify;
+}
