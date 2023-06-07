@@ -118,7 +118,7 @@
             <div class="p-6">
                 <h2 class="text-center text-white font-bold mb-4 text-lg">Une dernière question ?</h2>
                 <p class="text-white text-center drop-shadow-sm">Contactez-nous dès maintenant pour voir ensemble vos besoins et vous accompagner au mieux dans votre démarche.</p>
-                <a href="" class="mt-4 block text-center">
+                <a href="{{ Route('contact') }}" class="mt-4 block text-center">
                     <button class="py-2.5 px-4 bg-white rounded-xl">Contactez-nous !</button>
                 </a>
             </div>

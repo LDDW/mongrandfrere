@@ -123,7 +123,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="py-2 border-t border-gray-200">
+        <div class="py-2 border-t border-[#57C5B6]">
             @if (Route::has('login'))
                 @auth
                     <div class="mt-3 space-y-1">
@@ -131,6 +131,19 @@
                         <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                             {{ __('Mon compte') }}
                         </x-responsive-nav-link>
+
+                        <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                            {{ __('Formations') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                            {{ __('Commandes') }}
+                        </x-responsive-nav-link>
+
+                        @if (Auth::user() && Auth::user()->admin === 1)
+                            <x-responsive-nav-link href="{{ route('admin.dashboard') }}">
+                                {{ __('Tableau de bord admin') }}
+                            </x-responsive-nav-link>
+                        @endif
         
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}" x-data>

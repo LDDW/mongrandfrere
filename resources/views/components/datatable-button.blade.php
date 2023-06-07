@@ -31,6 +31,10 @@
         case 'white':
             $color = 'bg-white hover:bg-gray-50 tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150';
             break;
+
+        case 'mgf':
+            $color = 'bg-[#57C5B6] hover:bg-[#57C5B6] text-white';
+            break;
         
         default:
             $color = 'bg-blue-500 hover:bg-blue-600 text-white';

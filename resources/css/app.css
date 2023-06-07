@@ -6,6 +6,10 @@
     display: none;
 }
 
+* {
+    outline: none;
+}
+
 section {
     @apply max-w-7xl mx-auto grid grid-cols-1 gap-4 py-10 md:px-5 lg:px-10;
 }

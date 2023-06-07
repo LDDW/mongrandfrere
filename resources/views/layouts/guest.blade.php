@@ -18,10 +18,12 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
+
             <!-- Page Content -->
-            <main>
+            <main class="px-4 bg-[#FFF1DC]">
                 {{ $slot }}
             </main>
+            
         </div>
 
         @stack('modals')

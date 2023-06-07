@@ -74,3 +74,23 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 
 });
+
+Route::get('/conditions-générales-d\'utilisation', function () {
+    return view('termsUse');
+})->name('terms.use.show');
+
+Route::get('/conditions-générales-de-vente', function () {
+    return view('termsSale');
+})->name('terms.sale.show');
+
+Route::get('/mentions-légales', function () {
+    return view('legalInfo');
+})->name('legal.notice.show');
+
+Route::get('/politique-de-confidentialité', function () {
+    return view('policy');
+})->name('privacy.policy.show');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');

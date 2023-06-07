@@ -1,10 +1,5 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
 
         @if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">
@@ -15,30 +10,31 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div>
-                <x-input type="email" fieldName="email" name="email" label="Email" required autofocus autocomplete="username" />
+            <h1 class="text-center font-bold text-2xl mb-10">Connexion</h1>
+
+            <div class="mb-6">
+                <x-input type="email" fieldName="email" name="email" label="Email" required autofocus autocomplete="username" placeholder="Votre@email.com" />
             </div>
 
             <div class="mt-4">
-                <x-input type="password" fieldName="password" name="password" label="Mot de passe" required autocomplete="current-password"/>
+                <x-input type="password" fieldName="password" name="password" label="Mot de passe" required autocomplete="current-password" placeholder="Entrez votre mot de passe"/>
             </div>
 
             <div class="mt-4 flex items-center justify-between">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</span>
                 </label>
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                    <a class="underline text-sm text-[#57C5B6] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Mot de passe oublié ?') }}
                     </a>
                 @endif
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">Vous n'avez pas de compte ?</a>
-                <x-datatable-button label="Connexion" class="ml-4"/>
-            </div>
+
+            <x-datatable-button label="Connexion" class="w-full mt-8 mb-4 rounded-xl" color="mgf"/>
+            <p class="text-sm text-center">Vous n'avez pas de compte ? <a href="{{ route('register') }}" class="underline text-[#57C5B6]">S'inscrire</a></p>
 
         </form>
     </x-authentication-card>

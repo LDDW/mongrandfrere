@@ -1,4 +1,4 @@
-@props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
+@props(['title' => __('Confirmer le mot de passe'), 'content' => __('Pour votre sécurité, veuillez confirmer votre mot de passe pour continuer.'), 'button' => __('Confirmer')])
 
 @php
     $confirmableId = md5($attributes->wire('then'));
@@ -24,7 +24,7 @@
         {{ $content }}
 
         <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-            <x-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" autocomplete="current-password"
+            <x-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Mot de passe') }}" autocomplete="current-password"
                         fieldName="confirmable_password"
                         label="Mot de passe"
                         x-ref="confirmable_password"
@@ -36,13 +36,8 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
-            {{ __('Cancel') }}
-        </x-secondary-button>
-
-        <x-button class="ml-3" dusk="confirm-password-button" wire:click="confirmPassword" wire:loading.attr="disabled">
-            {{ $button }}
-        </x-button>
+        <x-datatable-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled" label="Annuler" class="rounded-xl uppercase border border-gray-300" color="white" />
+        <x-datatable-button dusk="confirm-password-button" wire:click="confirmPassword" wire:loading.attr="disabled" label="{{ $button }}" class="rounded-xl uppercase ml-4" color="mgf"/>
     </x-slot>
 </x-dialog-modal>
 @endonce

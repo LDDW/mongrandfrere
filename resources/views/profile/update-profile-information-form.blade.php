@@ -1,15 +1,13 @@
 <x-form-section submit="updateProfileInformation">
     <x-slot name="title">
-        {{ __('Profile Information') }}
+        {{ __('Informations sur le profil') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Mettez à jour les informations de profil et l\'adresse e-mail de votre compte.') }}
     </x-slot>
 
     <x-slot name="form">
-
-        
 
         <!-- Lastname -->
         <div class="col-span-6 sm:col-span-4">
@@ -27,16 +25,16 @@
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
                 <p class="text-sm mt-2">
-                    {{ __('Your email address is unverified.') }}
+                    {{ __('Votre adresse électronique n\'est pas vérifiée.') }}
 
                     <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('Cliquez ici pour renvoyer l\'e-mail de vérification.') }}
                     </button>
                 </p>
 
                 @if ($this->verificationLinkSent)
                     <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
+                        {{ __('Un nouveau lien de vérification a été envoyé à votre adresse électronique.') }}
                     </p>
                 @endif
             @endif
@@ -45,11 +43,9 @@
 
     <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
+            {{ __('Sauvegarder.') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-button>
+        <x-datatable-button wire:loading.attr="disabled" wire:target="photo" label="Sauvegarder" class="rounded-xl uppercase" color="mgf"/>
     </x-slot>
 </x-form-section>
