@@ -60,7 +60,7 @@
         <div class="md:flex md:gap-16 lg:gap-32">
             <ul class="mb-5 mx-auto md:m-0">
                 <li class="text-center md:text-left">
-                    <a href="" class=" text-white text-lg font-bold">Accueil</a>
+                    <a href="{{ Route('index') }}" class=" text-white text-lg font-bold">Accueil</a>
                 </li>
                 <li class="text-center md:text-left">
                     <a href="" class=" text-base text-[#DCF2ED]">Présentation de l'entreprise</a>
@@ -72,25 +72,19 @@
                     <a href="" class=" text-base text-[#DCF2ED]">Questions</a>
                 </li>
                 <li class="text-center md:text-left">
-                    <a href="" class=" text-base text-[#DCF2ED]">Contact</a>
+                    <a href="{{ Route('contact') }}" class=" text-base text-[#DCF2ED]">Contact</a>
                 </li>
             </ul>
 
             <ul>
                 <li class="text-center md:text-left">
-                    <a href="" class="text-white text-lg font-bold">Nos services</a>
+                    <a href="{{ Route('formations') }}" class="text-white text-lg font-bold">Nos services</a>
                 </li>
                 <li class="text-center md:text-left">
-                    <a href="" class="text-base text-[#DCF2ED]">Formation Gratuite</a>
+                    <a href="{{  Route('articles') }}" class="text-white text-lg font-bold">Actualités</a>
                 </li>
                 <li class="text-center md:text-left">
-                    <a href="" class="text-base text-[#DCF2ED]">Formations Payantes</a>
-                </li>
-                <li class="text-center md:text-left">
-                    <a href="" class="text-white text-lg font-bold">Actualités</a>
-                </li>
-                <li class="text-center md:text-left">
-                    <a href="" class="text-white text-lg font-bold">Qui sommes-nous ?</a>
+                    <a href="{{ Route('about') }}" class="text-white text-lg font-bold">Qui sommes-nous ?</a>
                 </li>
             </ul>
         </div>
