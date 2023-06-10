@@ -173,6 +173,9 @@ return [
 
         // DOM PDF
         Barryvdh\DomPDF\ServiceProvider::class,
+
+        // Livewire
+        Livewire\LivewireServiceProvider::class,
         
     ])->toArray(),
 
