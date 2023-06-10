@@ -17,6 +17,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@glidejs/glide": "^3.6.0",
         "aos": "^3.0.0-beta.6"
     }
 }

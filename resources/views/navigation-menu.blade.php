@@ -21,7 +21,7 @@
                 <x-nav-link href="{{ route('articles') }}">
                     {{ __('Actualités') }}
                 </x-nav-link>
-                <x-nav-link href="{{ route('formations') }}">
+                <x-nav-link href="{{ route('about') }}">
                     {{ __('Qui sommes-nous ?') }}
                 </x-nav-link>
             </div>
@@ -117,7 +117,7 @@
             <x-responsive-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')">
                 {{ __('Actualités') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('formations') }}" :active="request()->routeIs('formations')">
+            <x-responsive-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
                 {{ __('Qui sommes-nous ?') }}
             </x-responsive-nav-link>
         </div>

@@ -33,6 +33,11 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 Route::get('/formations', [FormationController::class, 'index'])->name('formations');
 Route::get('/formations/{formation}', [FormationController::class, 'show'])->name('formation');
 
+// about 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 // auth routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
