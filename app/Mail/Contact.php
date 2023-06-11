@@ -2,24 +2,27 @@
 
 namespace App\Mail;
 
-use Illuminate\Mail\Mailables\Address;
-
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 
-class OrderMail extends Mailable
+class Contact extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public array $customer;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(array $customer)
     {
-        //
+        $this->customer = $customer;
     }
 
     /**
@@ -28,8 +31,8 @@ class OrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('jeffrey@example.com', 'Jeffrey Way'),
-            subject: 'Order Shipped',
+            from: new Address($this->customer['email'], $this->customer['firstname'] . ' ' . $this->customer['lastname']),
+            subject: 'Nouveau contact de ' . $this->customer['firstname'] . ' ' . $this->customer['lastname'],
         );
     }
 
@@ -39,7 +42,7 @@ class OrderMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.orders',
+            view: 'emails.contact',
         );
     }
 
@@ -50,6 +53,12 @@ class OrderMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        if(isset($this->customer['file'])) {
+            return [
+                Attachment::fromStorage('contact/'.$this->customer['file']->hashName())
+            ];
+        } else {
+            return [];
+        }
     }
 }

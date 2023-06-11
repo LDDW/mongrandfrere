@@ -5,7 +5,6 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormationController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +36,10 @@ Route::get('/formations/{formation}', [FormationController::class, 'show'])->nam
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+// contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'contact'])->name('contact.store');
 
 // auth routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -100,6 +103,3 @@ Route::get('/politique-de-confidentialité', function () {
 Route::get('/politique-de-cookies', function () {
     return view('cookie');
 })->name('cookies.policy.show');
-
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

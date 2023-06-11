@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\Formation;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Usernotnull\Toast\Concerns\WireToast;
 
 class FormationController extends Controller
@@ -17,6 +19,9 @@ class FormationController extends Controller
      */
     public function index()
     {
+
+        // send email test 
+        Mail::to(auth()->user())->send(new OrderMail());
         return view('formations', [
             'formations' => Formation::all()
         ]);

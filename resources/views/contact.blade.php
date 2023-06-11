@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="mx-auto py-10">
         <div class="w-full bg-white shadow-md overflow-hidden rounded-xl p-10 max-w-md md:max-w-xl mx-auto">
-            <form method="POST" action="">
+            <form method="POST" action="{{ Route('contact.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <h1 class="text-center font-bold text-2xl mb-10">Contacte-nous directement ici !</h1>
@@ -20,7 +20,7 @@
 
                 <div class="mt-4 mb-6 relative">
                     <label for="message" class="block absolute -top-2 left-4 z-10 px-1 text-xs text-gray-500 select-none bg-white @error("message") border-red-400 @enderror">Message</label>
-                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message" class="w-full px-3 py-2.5 text-sm border-[0.5px] rounded-sm border-gray-300 outline-none focus:border-black transition-all resize-none"></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message" class="w-full px-3 py-2.5 text-sm border-[0.5px] rounded-sm border-gray-300 outline-none focus:border-black transition-all resize-none">{{ old('message') }}</textarea>
                     @error("message")
                         <div class="mt-2 text-red-400 text-sm">{{ $message }}</div>
                     @enderror
@@ -35,7 +35,7 @@
                 </div>
     
                 <div class="flex justify-end mt-4">
-                    <x-datatable-button label="Envoyer" class="w-full mb-4 rounded-xl" color="mgf"/>
+                    <x-datatable-button type="submit" label="Envoyer" class="w-full mb-4 rounded-xl" color="mgf"/>
                 </div>
             </form>
         </div>
