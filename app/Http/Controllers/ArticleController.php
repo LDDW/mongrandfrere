@@ -52,7 +52,7 @@ class ArticleController extends Controller
             // image upload 
             if(isset($request->img)){
                 $image = $request->file('img');
-                $filename = $image->hashName();
+                $filename = $image->getClientOriginalName(). '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('storage/images/articles'), $filename);
             }
             
@@ -192,6 +192,12 @@ class ArticleController extends Controller
                 'status' => $request->status, 
                 'img_name' => isset($filename) ? $filename : '',
             ]);
+
+            if ($request->hasFile('img')) {
+                $image = $request->file('img');
+                $filename = $image->getClientOriginalName(). '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('storage/images/articles'), $filename);
+            }
 
             // toast success for ui
             toast()

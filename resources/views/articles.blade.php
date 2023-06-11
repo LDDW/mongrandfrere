@@ -3,6 +3,11 @@
         @vite(['node_modules/@glidejs/glide/dist/css/glide.core.min.css'])
     @endpush
 
+    <form action="{{ Route('checkout') }}" method="POST">
+        @csrf
+        <button type="submit">Checkout</button>
+    </form>
+
     <section>
         <h2 class="text-2xl mb-10 font-semibold" data-aos="zoom-in-up">Les <span class="text-[#57C5B6]">derniers</span> articles</h2>
         <div class="glide relative max-w-5xl mx-auto">

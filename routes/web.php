@@ -5,6 +5,7 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,10 @@ Route::get('/about', function () {
 // contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'contact'])->name('contact.store');
+
+// checkout
+Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+Route::get('/checkout/success', [StripeController::class, 'success'])->name('checkout.success');
 
 // auth routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {

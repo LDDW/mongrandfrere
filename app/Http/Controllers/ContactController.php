@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Contact;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Usernotnull\Toast\Concerns\WireToast;
 
@@ -34,14 +35,36 @@ class ContactController extends Controller
             $request->file->store('contact');            
         }
 
-        try {
+        $backtrace = debug_backtrace()[0];
 
+        try {
             Mail::to($request->email)->send(new Contact($request->all()));
 
+            // toast succes
+            toast()
+                ->success('L\'email a été envoyé !', 'Succès')
+                ->pushOnNextPage();
+
+            // log success
+            Log::info('email contact envoyé', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+            ]);
+
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // toast success
+            toast()
+                ->danger('L\'email n\'a pas été envoyé !', 'Erreur')
+                ->pushOnNextPage();
+
+            // log error
+            Log::error('email contact pas envoyé', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $e->getMessage(),
+            ]);
         }
 
-        return redirect()->route('contact');
+        return redirect()->route('index');
     }
 }

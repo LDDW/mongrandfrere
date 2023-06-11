@@ -11,14 +11,12 @@
             </div>
         @endif
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
+        <div class="mt-4 text-center">
+            <form method="POST" class="mb-4" action="{{ route('verification.send') }}">
                 @csrf
 
                 <div>
-                    <x-button type="submit">
-                        {{ __('Renvoyer l\'e-mail de vérification') }}
-                    </x-button>
+                    <x-datatable-button type="submit" label="Renvoyer l'e-mail de vérification" class="w-full rounded-xl" color="mgf"/>
                 </div>
             </form>
 

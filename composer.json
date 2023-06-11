@@ -15,6 +15,7 @@
         "livewire/livewire": "^2.11",
         "opcodesio/log-viewer": "^2.4",
         "spatie/laravel-cookie-consent": "^3.2",
+        "stripe/stripe-php": "^10.15",
         "symfony/translation": "^6.2",
         "usernotnull/tall-toasts": "^1.7"
     },
