@@ -1,10 +1,4 @@
 <div>
-
-    {{-- quill editor css --}}
-
-    @section('css')
-        
-    @endsection
     
     {{-- title --}}
     

@@ -84,64 +84,6 @@ class FormationController extends Controller
         return view('admin.formation');
     }
 
-    public function store(Request $request) {
-        dd($request->all());
-        $request->validate([
-            'title' => 'required_if:status,published|string|min:3',
-            'description' => 'required_if:status,published|string|min:10',
-            'price' => 'required_if:status,published|numeric|min:0',
-            'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
-            'status' => 'required|in:draft,published'
-        ]);
-
-        $backtrace = debug_backtrace()[0];
-
-        try {
-            // image upload 
-            if(isset($request->img)){
-                $image = $request->file('img');
-                $filename = $image->hashName();
-                $image->move(public_path('storage/images/articles'), $filename);
-            }
-
-            Formation::create([
-                'title' => $request->title,
-                'desc' => $request->description,
-                'price' => $request->price,
-                'img' => isset($filename) ? $filename : '',
-                'status' => $request->status,
-            ]);
-
-            // toast success for ui
-            toast()
-                ->success('La formation a bien été créé !', 'Création réussite')
-                ->pushOnNextPage();
-
-            // log success
-            Log::info("La formation a bien été créé", [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-            ]);
-
-        } catch (QueryException $qe) {
-            // toast error for ui
-            toast()
-                ->danger('La formation n\'a pas pu être créé !', 'Création échouée')
-                ->pushOnNextPage();
-            
-            // log error
-            Log::error("La formation n'a pas pu être créé", [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-                'error' => $qe->getMessage(),
-            ]);
-        }
-
-        return view('admin.formations', [
-            'formations' => Formation::all()
-        ]);
-    }
-
     /**
      * Display the specified resource.
      */
@@ -163,65 +105,9 @@ class FormationController extends Controller
      */
     public function edit(Formation $formation)
     {
-        return view('admin.formation_edit', [
+        return view('admin.formation', [
             'formation' => $formation,
         ]);
-    }
-
-    public function update(Request $request, Formation $formation)
-    {
-        $request->validate([
-            'title' => 'required_if:status,published|string|min:3',
-            'content' => 'required_if:status,published|string|min:10',
-            'price' => 'required_if:status,published|numeric|min:0',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'status' => 'required|in:draft,published'
-        ]);
-
-        $backtrace = debug_backtrace()[0];
-
-        try {
-            // image upload 
-            if(isset($request->img)){
-                $image = $request->file('img');
-                $filename = $image->hashName();
-                $image->move(public_path('storage/images/articles'), $filename);
-            }
-
-            $formation->update([
-                'title' => $request->title,
-                'desc' => $request->content,
-                'price' => $request->price,
-                'img_name' => isset($filename) ? $filename : $formation->img,
-                'status' => $request->status,
-            ]);
-
-            // toast success for ui
-            toast()
-                ->success('La formation a bien été modifié !', 'Modification réussite')
-                ->pushOnNextPage();
-
-            // log success
-            Log::info("La formation a bien été modifié", [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-            ]);
-
-        } catch (QueryException $qe) {
-            // toast error for ui
-            toast()
-                ->danger('La formation n\'a pas pu être modifié !', 'Modification échouée')
-                ->pushOnNextPage();
-            
-            // log error
-            Log::error("La formation n'a pas pu être modifié", [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-                'error' => $qe->getMessage(),
-            ]);
-        }
-
-        return redirect()->route('admin.formations');
     }
 
     public function destroy(Formation $formation)

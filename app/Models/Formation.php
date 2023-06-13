@@ -16,7 +16,7 @@ class Formation extends Model
      */
     protected $fillable = [
         'title',
-        'desc',
+        'content',
         'price',
         'new_price',
         'status',
@@ -27,5 +27,9 @@ class Formation extends Model
 
     public function order () {
         return $this->hasMany(Order::class, 'formation_id');
+    }
+
+    public function file () {
+        return $this->hasMany(File::class, 'formation_id');
     }
 }

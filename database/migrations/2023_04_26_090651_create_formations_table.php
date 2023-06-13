@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('formations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('desc');
+            $table->text('content');
             $table->float('price')->nullable();
             $table->float('new_price')->nullable();
             $table->string('status')->default('brouillon');

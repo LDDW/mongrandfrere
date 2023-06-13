@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Files extends Model
+class File extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Files extends Model
      */
     protected $fillable = [
         'id',
-        'path',
-        'chapter_id',
+        'file_name',
+        'formation_id',
     ];
 }

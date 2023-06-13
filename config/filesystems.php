@@ -36,6 +36,16 @@ return [
             'throw' => false,
         ],
 
+        'livewire-tmp' => [
+            'driver' => 'local',
+            'root' => storage_path('app/livewire-tmp'),
+            'url' => env('APP_URL').'/storage/livewire-tmp',
+            'visibility' => 'private',
+            'throw' => false,
+            'cleanup' => true,
+            'cleanup_lifetime' => 120, // in minutes
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

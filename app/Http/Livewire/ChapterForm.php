@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Chapter;
-use Illuminate\Database\QueryException;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
