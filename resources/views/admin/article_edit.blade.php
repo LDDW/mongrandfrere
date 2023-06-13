@@ -27,7 +27,12 @@
             </div>
         @endif
         <x-input type="text" fieldName="title" name="title" value="{{ $article->title }}" label="Titre de l'article" class="col-span-full"/>
-        <x-input type="file" fieldName="img" name="img" label="Miniature de l'article" class="col-span-full"/>
+        <x-input type="file" fieldName="img" name="img" value="" label="Miniature de l'article" class="col-span-full"/>
+        @if (isset($article->img_name))
+            <div class="col-span-full">
+                <img src="{{ asset('storage/articles/'.$article->img_name) }}" alt="Mon image">
+            </div>
+        @endif
         <div class="col-span-full ">
             <div id="editor" class="bg-gray-50 h-[40vh]">
                 @php

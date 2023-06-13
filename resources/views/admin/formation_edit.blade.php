@@ -51,21 +51,11 @@
                     @endphp
                 </div>
             </div>
+            @livewire('chapter-form')
             <div class="col-span-full flex flex-row-reverse">
                 <x-datatable-button label="Sauvegarder les modifications" />
             </div>
         </form>
-    
-        <h2 class="col-span-full text-xl">Chapitres</h2>
-        @foreach ($chapters as $index => $chapter)
-            <a href="{{ Route('admin.formation.chapter.edit', ['formation' => $formation->id, 'chapter' => $chapter->id]) }}" class="col-span-full">
-                #{{$index .' '. $chapter->title }}
-            </a>
-            {{-- <div class="col-span-full">{{ $chapter }}</div> --}}
-        @endforeach
-        <a href="{{ Route('admin.formation.chapter.create', ['formation' => $formation->id]) }}" class="col-span-full">
-            <x-datatable-button label="Ajouter un chapitre" />
-        </a>
     </div>
 
     @push('scripts')

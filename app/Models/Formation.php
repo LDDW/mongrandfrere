@@ -28,8 +28,4 @@ class Formation extends Model
     public function order () {
         return $this->hasMany(Order::class, 'formation_id');
     }
-
-    public function chapter () {
-        return $this->hasMany(Chapter::class, 'formation_id');
-    }
 }

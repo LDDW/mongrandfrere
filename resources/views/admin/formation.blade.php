@@ -50,6 +50,8 @@
             </div>
         @endif
         <textarea name="description" id="hidden-textarea" cols="30" rows="10" class="hidden"></textarea>
+
+        @livewire('chapter-form')
     
         <div class="col-span-full flex flex-row-reverse">
             <x-datatable-button label="Enregistrer" />

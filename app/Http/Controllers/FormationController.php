@@ -19,9 +19,6 @@ class FormationController extends Controller
      */
     public function index()
     {
-
-        // send email test 
-        Mail::to(auth()->user())->send(new OrderMail());
         return view('formations', [
             'formations' => Formation::all()
         ]);
@@ -88,6 +85,7 @@ class FormationController extends Controller
     }
 
     public function store(Request $request) {
+        dd($request->all());
         $request->validate([
             'title' => 'required_if:status,published|string|min:3',
             'description' => 'required_if:status,published|string|min:10',
@@ -167,7 +165,6 @@ class FormationController extends Controller
     {
         return view('admin.formation_edit', [
             'formation' => $formation,
-            'chapters' => Formation::find($formation->id)->chapter()->get()
         ]);
     }
 

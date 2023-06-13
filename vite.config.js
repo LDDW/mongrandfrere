@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/glide.core.min.css',
                 'resources/js/app',
                 'resources/js/glide.conf.js',
             ],

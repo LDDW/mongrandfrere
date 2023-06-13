@@ -35,64 +35,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required_if:status,published',
-            'content' => 'required_if:status,published',
-            'status' => 'required|in:draft,published',
-            'img' => 'required_if:status,published|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $backtrace = debug_backtrace()[0];
-
-        try {
-            // image upload 
-            if(isset($request->img)){
-                $image = $request->file('img');
-                $filename = $image->getClientOriginalName(). '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('storage/images/articles'), $filename);
-            }
-            
-            // save article to database
-            Article::create([
-                'title' => ucfirst($request->title),
-                'content' => $request->content,
-                'status' => $request->status, 
-                'img_name' => isset($filename) ? $filename : '',
-            ]);
-
-            // toast success for ui
-            toast()
-                ->success('L\'article a bien été créé !', 'Création réussite')
-                ->pushOnNextPage();
-            
-            // log success
-            Log::info('Article created', [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-            ]);
-
-        } catch (QueryException $qe) {
-            // toast error for ui
-            toast()
-                ->danger('L\'article n\'a pas été créé !', 'Erreur')
-                ->pushOnNextPage();
-
-            // log error 
-            Log::error('Erreur avec la création de l\'article', [
-                'class' => $backtrace['class'],
-                'function' => $backtrace['function'],
-                'error' => $qe->getMessage(),
-            ]);
-        }
-
-        return redirect()->route('admin.articles');
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Article $article)
@@ -166,7 +108,7 @@ class ArticleController extends Controller
     {
         $article = Article::where('id', $id)->firstOrFail();
 
-        return view('admin.article_edit', [
+        return view('admin.article', [
             'article' => $article
         ]);
     }
@@ -193,10 +135,17 @@ class ArticleController extends Controller
                 'img_name' => isset($filename) ? $filename : '',
             ]);
 
-            if ($request->hasFile('img')) {
+            // if ($request->hasFile('img')) {
+            //     $image = $request->file('img');
+            //     $filename = $image->getClientOriginalName(). '.' . $image->getClientOriginalExtension();
+            //     $image->move(public_path('/articles'), $filename);
+            // }
+
+            // image upload 
+            if(isset($request->img)){
                 $image = $request->file('img');
                 $filename = $image->getClientOriginalName(). '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('storage/images/articles'), $filename);
+                $image->move(public_path('/articles'), $filename);
             }
 
             // toast success for ui

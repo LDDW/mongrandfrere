@@ -1,6 +1,6 @@
 <x-app-layout>
     @push('styles')
-        @vite(['node_modules/@glidejs/glide/dist/css/glide.core.min.css'])
+        @vite(['resources/css/glide.core.min.css'])
     @endpush
 
     <form action="{{ Route('checkout') }}" method="POST">

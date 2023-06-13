@@ -58,28 +58,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         // admin articles
         Route::get('/admin/articles', [ArticleController::class, 'admin'])->name('admin.articles');
         Route::get('/admin/articles/create', [ArticleController::class, 'create'])->name('admin.article.create');
-        Route::post('/admin/articles', [ArticleController::class, 'store'])->name('admin.article.store');
         Route::post('/admin/articles/{article}', [ArticleController::class, 'publish'])->name('admin.article.publish');
         Route::get('/admin/articles/{article}', [ArticleController::class, 'preview'])->name('admin.article');
         Route::get('/admin/articles/{article}/edit', [ArticleController::class, 'edit'])->name('admin.article.edit');
-        Route::put('/admin/articles/{article}', [ArticleController::class, 'update'])->name('admin.article.update');
         Route::delete('/admin/articles/{article}', [ArticleController::class, 'destroy'])->name('admin.article.destroy');
 
         // admin formations
         Route::get('/admin/formations', [FormationController::class, 'admin'])->name('admin.formations');
         Route::get('/admin/formations/create', [FormationController::class, 'create'])->name('admin.formation.create');
-        Route::post('/admin/formations', [FormationController::class, 'store'])->name('admin.formation.store');
         Route::post('/admin/formations/{formation}', [FormationController::class, 'publish'])->name('admin.formation.publish');
         Route::get('/admin/formations/{formation}', [FormationController::class, 'preview'])->name('admin.formation');
         Route::get('/admin/formations/{formation}/edit', [FormationController::class, 'edit'])->name('admin.formation.edit');
-        Route::put('/admin/formations/{formation}', [FormationController::class, 'update'])->name('admin.formation.update');
         Route::delete('/admin/formations/{formation}', [FormationController::class, 'destroy'])->name('admin.formation.destroy');
-        // admin formations chapters
-        Route::get('/admin/formations/{formation}/chapters/create', [ChapterController::class, 'create'])->name('admin.formation.chapter.create');
-        Route::post('/admin/formations/{formation}/chapters', [ChapterController::class, 'store'])->name('admin.formation.chapter.store');
-        Route::get('/admin/formations/{formation}/chapters/{chapter}/edit', [ChapterController::class, 'edit'])->name('admin.formation.chapter.edit');
-        Route::put('/admin/formations/{formation}/chapters/{chapter}', [ChapterController::class, 'update'])->name('admin.formation.chapter.update');
-        Route::delete('/admin/formations/{formation}/chapters/{chapter}', [ChapterController::class, 'destroy'])->name('admin.formation.chapter.destroy');
         
         // admin users
         Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');

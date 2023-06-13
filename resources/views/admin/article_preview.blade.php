@@ -24,13 +24,14 @@
     </div>
 
     <div class="bg-white rounded-sm p-6 shadow-sm">
-        <img src="../../public/storage/images/articles/f63N4DdkUK3oNZiZoflfPP7KocBF6BHFP1dJmVG6.png" alt="Mon image">
-        {{ $article->img_name }}
+        <img src="{{ asset('storage/articles/'.$article->img_name) }}" alt="Mon image">
+        {{ $article->img_name }}<br/>
         {{ $article->id }}<br/>
         {{ $article->title }}<br/>
         {{-- /Users/benjamin/Documents/VSCODE/mongrandfrereV2/public/storage/images/articles/f63N4DdkUK3oNZiZoflfPP7KocBF6BHFP1dJmVG6.png --}}
         {{-- '../../public/storage/images/articles/'.$article->img_name --}}
-    
+        http://127.0.0.1:8000/storage/articles/Capture_d’écran_2023-06-12_à_18.18.48.png
+        http://127.0.0.1:8000/storage/articles/Capture_d%E2%80%99%C3%A9cran_2023-06-12_%C3%A0_18.18.48.png
         @php
             echo html_entity_decode($article->content);
         @endphp
