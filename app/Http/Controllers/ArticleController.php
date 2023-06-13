@@ -17,7 +17,8 @@ class ArticleController extends Controller
     public function index()
     {
         return view('articles', [
-            'articles' => Article::all()
+            'articles' => Article::orderBy('created_at', 'desc')->get(),
+            'latestArticles' => Article::latest()->take(3)->get(),
         ]);
     }
 
@@ -40,7 +41,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         // verify that the article is published
-        if (!$article->published) {
+        if ($article->status !== 'published') {
             abort(404);
         }
 

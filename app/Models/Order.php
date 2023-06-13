@@ -15,10 +15,10 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'stripe_id',
-        'invoice_pdf_path',
         'user_id',
         'formation_id',
+        'status',
+        'session_id'
     ];
 
     public function user() {

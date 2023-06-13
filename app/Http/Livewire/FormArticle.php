@@ -73,13 +73,6 @@ class FormArticle extends Component
                 'content' => $this->content,
                 'status' => $this->status,
             ];
-            
-            // save article to database
-            if($this->isEdit){
-                Article::where('id', $this->article->id)->update($array);
-            } else {
-                Article::create($array);
-            }
 
             // image upload to storage
             if(isset($this->img) && gettype($this->img) !== 'string'){
@@ -93,6 +86,15 @@ class FormArticle extends Component
                     $array['img_name'] = $this->img->getClientOriginalName();
                 }
             }
+            
+            // save article to database
+            if($this->isEdit){
+                Article::where('id', $this->article->id)->update($array);
+            } else {
+                Article::create($array);
+            }
+
+            
 
             // toast success
             toast()

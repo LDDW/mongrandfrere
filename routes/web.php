@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
+use App\Models\Order;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,12 +44,17 @@ Route::get('/about', function () {
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'contact'])->name('contact.store');
 
-// checkout
-Route::post('/checkout', [StripeController::class, 'checkout'])->name('checkout');
-Route::get('/checkout/success', [StripeController::class, 'success'])->name('checkout.success');
+// stripe 
+Route::post('webhook/payment/succeeded', [StripeController::class, 'handleWebhook']);
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'throttle:30,1'])->group(function () {
+    // checkout
+    Route::post('/checkout/{formation}', [StripeController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout/success', [StripeController::class, 'success'])->name('success');
+});
 
 // auth routes
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'throttle:30,1'])->group(function () {
 
     // admin routes
     Route::middleware(['admin'])->group(function() {

@@ -90,11 +90,11 @@ class FormationController extends Controller
     public function show(Formation $formation)
     {
         // verify that the formation is published
-        if (!$formation->published) {
+        if ($formation->status !== 'published') {
             abort(404);
         }
 
-        return view('formations.show', [
+        return view('formation', [
             'formation' => $formation,
             'randomFormation' => Formation::inRandomOrder()->take(3)->get()
         ]);

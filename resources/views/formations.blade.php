@@ -12,45 +12,21 @@
         <h2 class="text-2xl mb-10 font-semibold">Toutes nos formations</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative">
             <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
-            <a href="" data-aos="zoom-in-up">
-                <div class="bg-white p-4 rounded-xl">
-                    <div class="w-full aspect-square bg-gray-300 rounded-xl overflow-hidden mb-3">
-                        <img src="" alt="">
+            @foreach ($formations as $formation)
+                <a href="{{ Route('formation', ['formation' => $formation->id]) }}" data-aos="zoom-in-up">
+                    <div class="bg-white p-4 rounded-xl">
+                        <div class="w-full aspect-square bg-gray-300 rounded-xl overflow-hidden mb-3">
+                            <img src="{{ asset('storage/formations/'.$formation->img_name) }}" alt="Image de la formation nommé : {{ $formation->title }}" class="aspect-square w-full h-full bg-gray-50">
+                        </div>
+                        <h3 class="text-xl font-semibold truncate mb-2">{{ $formation->title }}</h3>
+                        <p class="mb-4 truncate">{{ strip_tags($formation->content) }}</p>
+                        <div class="flex items-center justify-between">
+                            <button class="py-2.5 px-4 bg-[#57C5B6] text-white rounded-xl">Voir la formation</button>
+                            <p class="truncate shrink-0 text-xl">{{ $formation->price }}€</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold truncate mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui veniam ad laudantium iure enim illo odio aliquid, fugiat ducimus perferendis provident numquam officiis iste voluptate nostrum tenetur eos eligendi! Quo.</h3>
-                    <p class="mb-4 truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    <div class="flex items-center justify-between">
-                        <button class="py-2.5 px-4 bg-[#57C5B6] text-white rounded-xl">Voir la formation</button>
-                        <p class="truncate shrink-0 text-xl">99.99€</p>
-                    </div>
-                </div>
-            </a>
-            <a href="" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="bg-white p-4 rounded-xl">
-                    <div class="w-full aspect-square bg-gray-300 rounded-xl overflow-hidden mb-3">
-                        <img src="" alt="">
-                    </div>
-                    <h3 class="text-xl font-semibold truncate mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui veniam ad laudantium iure enim illo odio aliquid, fugiat ducimus perferendis provident numquam officiis iste voluptate nostrum tenetur eos eligendi! Quo.</h3>
-                    <p class="mb-4 truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    <div class="flex items-center justify-between">
-                        <button class="py-2.5 px-4 bg-[#57C5B6] text-white rounded-xl">Voir la formation</button>
-                        <p class="truncate shrink-0 text-xl">99.99€</p>
-                    </div>
-                </div>
-            </a>
-            <a href="" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="bg-white p-4 rounded-xl">
-                    <div class="w-full aspect-square bg-gray-300 rounded-xl overflow-hidden mb-3">
-                        <img src="" alt="">
-                    </div>
-                    <h3 class="text-xl font-semibold truncate mb-2">Formation 1 fzebf hzebfzb efbz nfjz enfjezn fzebf ef zefnzeu fnbze</h3>
-                    <p class="mb-4 truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    <div class="flex items-center justify-between">
-                        <button class="py-2.5 px-4 bg-[#57C5B6] text-white rounded-xl">Voir la formation</button>
-                        <p class="truncate shrink-0 text-xl">99.99€</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            @endforeach
         </div>
     </section>
 </x-app-layout>

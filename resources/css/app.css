@@ -21,6 +21,10 @@ section {
     background-size: cover;
 }
 
+.paginate_bar {
+    @apply bg-gray-50 p-3 border-t border-gray-200 flex items-center justify-end;
+}
+
 /* ========================= TABLE ========================= */
 .table {
     @apply block w-full overflow-x-scroll overflow-y-hidden text-sm;
@@ -41,9 +45,7 @@ section {
     @apply pl-4 shrink-0 flex items-center border-r border-gray-200;
 }
 
-.paginate_bar {
-    @apply bg-gray-50 p-3 border-t border-gray-200 flex items-center justify-end;
-}
+/* ========================= LEAGAL ========================= */
 
 .legal h1 {
     @apply text-3xl font-semibold;
@@ -59,4 +61,22 @@ section {
 
 .legal li {
     @apply mb-3;
+}
+
+/* ========================= ARTICLE ========================= */
+
+.article>h1 {
+    @apply text-3xl font-semibold;
+}
+
+.article>h2 {
+    @apply text-2xl font-semibold;
+}
+
+.article>h3 {
+    @apply text-xl font-semibold;
+}
+
+.article>p, .article>ul {
+    @apply text-base text-justify;
 }
