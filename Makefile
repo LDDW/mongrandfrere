@@ -1,8 +1,8 @@
 deploy: public/build/manifest.json
-	rsync -avz public/build infotuto:~/sites/mongrandfrere/public
-	ssh infotuto 'cd ~/sites/mongrandfrere && git pull origin main && make install' 
+	rsync -avz public/build mgf:~/sites/mongrandfrere/public
+	ssh mgf 'cd ~/sites/mongrandfrere && git pull origin main && make install' 
 
-install: vendor/autoload.php .env/ public/storage 
+install: vendor/autoload.php .env/ public/storage
 	php artisan cache:clear
 	php artisan migrate
 
