@@ -8,7 +8,7 @@
         <div data-aos="zoom-in-up" class="md:max-w-lg md:mx-auto lg:grid lg:grid-cols-2 lg:max-w-4xl">
             <img src="/img/home_img_1.webp" alt="" class="w-4/5 mx-auto lg:w-full">
             <div class="bg-white p-4 rounded-xl w-4/5 mx-auto lg:h-min lg:my-auto">
-                <h1 class="text-lg lg:text-3xl font-medium mb-2">“Mon Grand Frère, ton coach emploi qui t'accompagne pour ta recherche <span class="text-[#57C5B6] font-bold">d'emploi</span>, <span class="text-[#57C5B6] font-bold">stage</span> ou une <span class="text-[#57C5B6] font-bold">alternance</span> !”</h1>
+                <h1 class="text-lg lg:text-3xl font-medium mb-2">“Mon Grand Frère, ton coach emploi qui t'accompagne pour ta recherche <span class="text-[#57C5B6] font-bold">d'emploi</span>, <span class="text-[#57C5B6] font-bold">stage</span> ou <span class="text-[#57C5B6] font-bold">alternance</span> !”</h1>
                 <i class="flex justify-end text-xs">Hugo et Kévin, coach recherche emploi</i>
             </div>
         </div>
