@@ -19,9 +19,11 @@
             <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
             @foreach ($formations as $formation)
                 @php
-                    $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
-                        return $order->formation_id === $formation->id && $order->status === 'paid';
-                    });
+                    if(isset(auth()->user()->order)){
+                        $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
+                            return $order->formation_id === $formation->id && $order->status === 'paid';
+                        });
+                    }
                 @endphp
                 <a href="{{ Route('formation', ['formation' => $formation->id]) }}" data-aos="zoom-in-up">
                     <div class="bg-white p-4 rounded-xl">
