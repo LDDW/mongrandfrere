@@ -2,7 +2,6 @@
     <div class="pb-3 pt-14 md:flex md:justify-between max-w-7xl mx-auto">
 
         <div class="w-44 mb-5 mx-auto max-w-7xl md:m-0">
-            <?xml version="1.0" encoding="UTF-8"?>
             <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
                 <defs>
                     <style>
