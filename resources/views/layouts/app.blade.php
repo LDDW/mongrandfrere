@@ -10,6 +10,7 @@
         <title>{{ config('app.name', 'MonGrandFrère') }} - @yield('pageTitle')</title>
         <meta name="description" content="@yield('pageDescription')">
         <meta name="author" content="MonGrandFrère">
+        @yield('googleBot')
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

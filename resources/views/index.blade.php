@@ -1,6 +1,7 @@
 <x-app-layout>
     @section('pageTitle') Accueil @endsection
     @section('pageDescription') Mon Grand Frère est une entreprise spécialisé dans l'accompagnement des étudiants et des professionnels dans la recherche d'un emploi, d'un stage ou d'une alternance. Nous leur offront différents services pour atteindre leurs objectifs professionnels. @endsection
+    @section('googleBot') <meta name="google-site-verification" content="{{ config('app.google_bot_id') }}" /> @endsection
 
     @include('cookie-consent::index')
     <section>

@@ -17,6 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'google_bot_id' => env('GOOGLE_BOT_ID', null),
 
     /*
     |--------------------------------------------------------------------------
