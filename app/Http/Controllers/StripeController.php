@@ -7,6 +7,7 @@ use App\Models\Formation;
 use App\Models\Order;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,6 +52,8 @@ class StripeController extends Controller
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $sessionId = $request->get('session_id');
 
+        $backtrace = debug_backtrace()[0];
+
         try {
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
             if (!$session) {
@@ -67,12 +70,35 @@ class StripeController extends Controller
             }
             Mail::to(auth()->user()->email)->send(new OrderMail());
 
-            return view('checkout-success');
+            // toast succes
+            toast()
+                ->success('Votre commande a bien été prise en compte !', 'Commande réussie')
+                ->pushOnNextPage();
+
+            // log success
+            Log::info('Order success', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+            ]);
+
+            return redirect()->route('formation', ['formation' => $order->formation_id]);
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
-        }
+            // toast error
+            toast()
+                ->danger('Une erreur est survenue lors de la commande', 'Erreur')
+                ->pushOnNextPage();
 
-        return view('checkout');
+            // log error
+            Log::error('Order error', [
+                'class' => $backtrace['class'],
+                'function' => $backtrace['function'],
+                'error' => $e->getMessage(),
+            ]);
+        }
+        
+
+        return redirect()->route('formations');
     }
 
     public function handleWebhook()
