@@ -7,7 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.min.css',
                 'resources/css/glide.core.min.css',
-                'resources/js/app',
+                'resources/js/app.min.js',
                 'resources/js/glide.conf.js',
             ],
             refresh: [
