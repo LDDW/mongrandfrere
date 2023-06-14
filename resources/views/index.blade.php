@@ -1,11 +1,14 @@
 <x-app-layout>
+    @section('pageTitle') Accueil @endsection
+    @section('pageDescription') Mon Grand Frère est une entreprise spécialisé dans l'accompagnement des étudiants et des professionnels dans la recherche d'un emploi, d'un stage ou d'une alternance. Nous leur offront différents services pour atteindre leurs objectifs professionnels. @endsection
+
     @include('cookie-consent::index')
     <section>
         <div data-aos="zoom-in-up" class="md:max-w-lg md:mx-auto lg:grid lg:grid-cols-2 lg:max-w-4xl">
-            <img src="/img/home_img_1.png" alt="" class="w-4/5 mx-auto lg:w-full">
+            <img src="/img/home_img_1.webp" alt="" class="w-4/5 mx-auto lg:w-full">
             <div class="bg-white p-4 rounded-xl w-4/5 mx-auto lg:h-min lg:my-auto">
-                <h1 class="text-lg lg:text-3xl font-medium mb-2">“Mon Grand Frère t’accompagne pour : trouver un <span class="text-[#57C5B6] font-bold">stage</span>, une <span class="text-[#57C5B6] font-bold">alternance</span> ou alors ton <span class="text-[#57C5B6] font-bold">métier de rêve</span> !”</h1>
-                <i class="flex justify-end text-xs">Hugo et Kévin CEO MonGrandFrère</i>
+                <h1 class="text-lg lg:text-3xl font-medium mb-2">“Mon Grand Frère, ton coach emploi qui t'accompagne pour trouver un <span class="text-[#57C5B6] font-bold">stage</span>, une <span class="text-[#57C5B6] font-bold">alternance</span> ou alors ton <span class="text-[#57C5B6] font-bold">métier de rêve</span> !”</h1>
+                <i class="flex justify-end text-xs">Hugo et Kévin, coach recherche emploi</i>
             </div>
         </div>
 
@@ -41,14 +44,14 @@
     <section class="relative">
 
         <div data-aos="zoom-in-up" data-aos-delay="100">
-            <img src="img/bg_el_1.png" alt="" class="absolute right-0 top-0 md:hidden lg:block lg:-right-20 lg:-top-20 xl:-right-24">
+            <img src="img/bg_el_1.webp" alt="" class="absolute right-0 top-0 md:hidden lg:block lg:-right-20 lg:-top-20 xl:-right-24">
         </div>
 
         <div class="md:grid md:grid-cols-2 md:gap-4">
 
             <div class="relative md:grid md:grid-cols-2 md:gap-4" data-aos="zoom-in-up">
                 <div class="relative mb-4 w-7/12 shadow-lg rounded-3xl overflow-hidden md:w-full md:mb-0">
-                    <img src="/img/home_img_2.png" alt="" class="w-full h-full" data-aos="fade-up">
+                    <img src="/img/home_img_2.webp" alt="" class="w-full h-full" data-aos="fade-up">
                     <div class="absolute top-4 left-4 bg-[#57C5B6]/[.8] p-2 w-4/6 rounded-xl">
                         <i class="text-white font-medium text-sm">ÉTAPE 1</i>
                         <p class="text-white font-black text-lg">DÉCOUVRIR</p>
@@ -56,7 +59,7 @@
                 </div>
                 
                 <div class="w-7/12 absolute right-0 -translate-y-1/2 shadow-lg rounded-3xl overflow-hidden md:relative md:-translate-y-0 md:w-full">
-                    <img src="/img/home_img_3.png" alt="" class="w-full h-full lg:relative lg:-translate-y-0">
+                    <img src="/img/home_img_3.webp" alt="" class="w-full h-full lg:relative lg:-translate-y-0">
                     <div class="absolute top-4 left-4 bg-[#57C5B6]/[.8] p-2 w-4/6 rounded-xl" data-aos="fade-up">
                         <i class="text-white font-medium text-sm">ÉTAPE 2</i>
                         <p class="text-white font-black text-lg">CHOISIR</p>
@@ -66,7 +69,7 @@
     
             <div class="relative md:grid md:grid-cols-2 md:gap-4" data-aos="zoom-in-up">
                 <div class="relative mb-4 w-7/12 shadow-lg rounded-3xl overflow-hidden md:w-full md:mb-0">
-                    <img src="/img/home_img_4.png" alt="" class="w-full h-full">
+                    <img src="/img/home_img_4.webp" alt="" class="w-full h-full">
                     <div class="absolute top-4 left-4 bg-[#57C5B6]/[.8] p-2 w-4/6 rounded-xl" data-aos="fade-up">
                         <i class="text-white font-medium text-sm">ÉTAPE 3</i>
                         <p class="text-white font-black text-lg">APPRENDRE</p>
@@ -74,7 +77,7 @@
                 </div>
 
                 <div class="w-7/12 absolute right-0 -translate-y-1/2 shadow-lg rounded-3xl overflow-hidden md:relative md:-translate-y-0 md:w-full">
-                    <img src="/img/home_img_5.png" alt="" class="w-full h-full">
+                    <img src="/img/home_img_5.webp" alt="" class="w-full h-full">
                     <div class="absolute top-4 left-4 bg-[#57C5B6]/[.8] p-2 w-4/6 rounded-xl" data-aos="fade-up">
                         <i class="text-white font-medium text-sm">ÉTAPE 4</i>
                         <p class="text-white font-black text-lg">SIGNER</p>
@@ -85,14 +88,14 @@
         </div>
 
         <div data-aos="zoom-in-up" data-aos-delay="100">
-            <img src="img/bg_el_1.png" alt="" class="absolute bottom-0 left-0 rotate-180 hidden lg:block lg:-bottom-20 lg:-left-20 xl:-left-24">
+            <img src="img/bg_el_1.webp" alt="" class="absolute bottom-0 left-0 rotate-180 hidden lg:block lg:-bottom-20 lg:-left-20 xl:-left-24">
         </div>
         
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3">
         <div class="z-10 md:row-span-3 md:flex md:flex-col md:justify-end" data-aos="zoom-in-up">
-            <img src="/img/home_img_6.png" alt="" class="w-4/6 md:max-w-xs md:mx-auto">
+            <img src="/img/home_img_6.webp" alt="" class="w-4/6 md:max-w-xs md:mx-auto">
             <div class="bg-[#57C5B6] p-4 rounded-xl text-white">
                 <p class="font-medium"><span class="block text-4xl font-bold">6</span>ans d'expérience dans la formation</p>
             </div>
@@ -111,7 +114,7 @@
     <section class="md:max-w-2xl md:mx-auto relative">
 
         <div data-aos="zoom-in-up" data-aos-delay="100">
-            <img src="img/bg_el_1.png" alt="" class="absolute right-0 top-0 md:hidden lg:block lg:-right-24 lg:-top-20">
+            <img src="img/bg_el_1.webp" alt="" class="absolute right-0 top-0 md:hidden lg:block lg:-right-24 lg:-top-20">
         </div>
 
         <div class="relative bg-[#57C5B6] rounded-xl overflow-hidden" data-aos="zoom-in-up">

@@ -65,18 +65,18 @@ section {
 
 /* ========================= ARTICLE ========================= */
 
-.article>h1 {
+.article h1 {
     @apply text-3xl font-semibold;
 }
 
-.article>h2 {
+.article h2 {
     @apply text-2xl font-semibold;
 }
 
-.article>h3 {
+.article h3 {
     @apply text-xl font-semibold;
 }
 
-.article>p, .article>ul {
+.article p, .article ul {
     @apply text-base text-justify;
 }

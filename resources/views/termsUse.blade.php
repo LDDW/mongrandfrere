@@ -1,4 +1,9 @@
 <x-app-layout>
+
+    {{-- SEO --}}
+    @section('pageTitle') Conditions générales d'utilisation @endsection
+    @section('pageDescription') Conditions générales d'utilisation @endsection
+
     <div class="px-6 lg:px-20 xl:px-44 py-10">
         <div class="md:max-w-2xl md:mx-auto lg:max-w-4xl xl:max-w-6xl legal">
             <h1>Conditions générales d'utilisation pour un site e-commerce</h1>

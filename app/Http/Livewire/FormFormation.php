@@ -70,7 +70,7 @@ class FormFormation extends Component
     }
 
     public function setFileStorage($index) {
-        $this->files[$index]['file']->storeAs('formations', $this->files[$index]['file']->getClientOriginalName());
+        $this->files[$index]['file']->storeAs('formations/'.$this->formation->id, $this->files[$index]['file_name'].'.'. $this->files[$index]['file']->getClientOriginalExtension());
     }
 
     public function submit(){
@@ -89,6 +89,7 @@ class FormFormation extends Component
         $backtrace = debug_backtrace()[0];
 
         try {
+            // dd(public_path('storage/formations/' . $this->formation->img_name));
 
             $array = [
                 'title' => $this->title,
@@ -96,13 +97,6 @@ class FormFormation extends Component
                 'price' => floatval($this->price),
                 'status' => $this->status,
             ];
-
-            // save article to database
-            if($this->isEdit){
-                Formation::where('id', $this->formation->id)->update($array);
-            } else {
-                Formation::create($array);
-            }
 
             // image upload to storage
             if(isset($this->img) && gettype($this->img) !== 'string'){
@@ -117,36 +111,54 @@ class FormFormation extends Component
                 }
             }
 
+            // save article to database
+            if($this->isEdit){
+                Formation::where('id', $this->formation->id)->update($array);
+            } else {
+                Formation::create($array);
+            }
+
+
             // file upload / update to storage
             $fileIds = array_column($this->files, 'id');
 
-            File::where('formation_id', $this->formation->id)
+            $fileHasBeenDelete = File::where('formation_id', $this->formation->id)
                 ->whereNotIn('id', $fileIds)
-                ->delete();
+                ->get();
 
-            foreach ($this->files as $index => $file) {
-                if (! empty($file['id'])) {
+            foreach ($fileHasBeenDelete as $file) {
+                $file->delete();
+                unlink(storage_path('storage/formations/'.$file->formation->id.'/'.$file->file_name));
+            }
+            
+            if(count($this->files) > 0){
+                foreach ($this->files as $index => $file) {
+                    if (! empty($file['id'])) {
+    
+                        $fileIsFinded = File::where('id', $file['id'])
+                            ->where('formation_id', $this->formation->id)
+                            ->first();   
+                            
+                        if ($fileIsFinded) {
+                            $extension = Str::afterLast($fileIsFinded->file_name, '.');
+                            $fileNameHasAlreadyExtension = pathinfo($file['file_name'], PATHINFO_EXTENSION);
 
-                    $fileIsFinded = File::where('id', $file['id'])
-                        ->where('formation_id', $this->formation->id)
-                        ->first();   
+                            // update file name in storage
+                            rename(storage_path('app/formations/'.$this->formation->id.'/'.$fileIsFinded->file_name), storage_path('app/formations/'.$this->formation->id.'/'.$file['file_name']. ($fileNameHasAlreadyExtension ? '' : ".{$extension}")));
+    
+                            $fileIsFinded->update([
+                                'file_name' => $file['file_name']. ($fileNameHasAlreadyExtension ? '' : ".{$extension}"),
+                            ]);
+                        }
                         
-                    if ($fileIsFinded) {
-                        $extension = Str::afterLast($fileIsFinded->file_name, '.');
-                        $fileNameHasAlreadyExtension = pathinfo($file['file_name'], PATHINFO_EXTENSION);
-
-                        $fileIsFinded->update([
-                            'file_name' => $file['file_name']. ($fileNameHasAlreadyExtension ? '' : ".{$extension}"),
+                    } else {
+                        File::create([
+                            'file_name' => trim($file['file_name'].'.'.$file['file']->getClientOriginalExtension()),
+                            'formation_id' => $this->formation->id,
                         ]);
+    
+                        $this->setFileStorage($index);
                     }
-                    
-                } else {
-                    File::create([
-                        'file_name' => trim($file['file_name'].'.'.$file['file']->getClientOriginalExtension()),
-                        'formation_id' => $this->formation->id,
-                    ]);
-
-                    $this->setFileStorage($index);
                 }
             }
 

@@ -1,4 +1,6 @@
 <x-app-layout>
+    @section('pageTitle') {{ $article->title }} @endsection
+    @section('pageDescription') {{ strip_tags($article->content) }} @endsection
 
     <section class="bg-white article p-6 max-w-5xl" data-aos="zoom-in-up">
         <img src="{{ asset('storage/articles/'.$article->img_name) }}" alt="Image de l'article nommé : {{ $article->title }}" class="aspect-square w-full h-60 bg-gray-50" data-aos="zoom-in-up" data-aos-delay="100">

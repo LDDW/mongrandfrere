@@ -13,7 +13,7 @@
         @if (isset($css)){{ $css }}@endif
         <!-- Scripts -->
         @toastScripts
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.min.css', 'resources/js/app.min.js'])
         @livewireStyles
     </head> 
     <body class="font-sans antialiased">

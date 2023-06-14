@@ -52,12 +52,6 @@
                                     <x-dropdown-link href="{{ route('profile.show') }}">
                                         {{ __('Mon compte') }}
                                     </x-dropdown-link>
-                                    <x-dropdown-link href="{{ route('profile.show') }}">
-                                        {{ __('Formations') }}
-                                    </x-dropdown-link>
-                                    <x-dropdown-link href="{{ route('profile.show') }}">
-                                        {{ __('Commandes') }}
-                                    </x-dropdown-link>
 
                                     @if (Auth::user() && Auth::user()->admin === 1)
                                         <x-dropdown-link href="{{ route('admin.dashboard') }}">
@@ -130,13 +124,6 @@
                         <!-- Account Management -->
                         <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                             {{ __('Mon compte') }}
-                        </x-responsive-nav-link>
-
-                        <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                            {{ __('Formations') }}
-                        </x-responsive-nav-link>
-                        <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                            {{ __('Commandes') }}
                         </x-responsive-nav-link>
 
                         @if (Auth::user() && Auth::user()->admin === 1)

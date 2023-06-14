@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('stripe_id');
-            $table->string('invoice_pdf_path');
+            $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
+            $table->string('session_id')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('formation_id')->constrained('formations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

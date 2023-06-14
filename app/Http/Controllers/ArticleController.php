@@ -17,8 +17,8 @@ class ArticleController extends Controller
     public function index()
     {
         return view('articles', [
-            'articles' => Article::orderBy('created_at', 'desc')->get(),
-            'latestArticles' => Article::latest()->take(3)->get(),
+            'articles' => Article::where('status', 'published')->orderBy('created_at', 'desc')->get(),
+            'latestArticles' => Article::where('status', 'published')->latest()->take(3)->get(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         return view('article', [
             'article' => $article,
-            'latestArticles' => Article::latest()->take(3)->get()
+            'latestArticles' => Article::where('status', 'published')->latest()->take(3)->get()
         ]);
     }
 

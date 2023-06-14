@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
@@ -55,6 +56,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'throttle:3
 
 // auth routes
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'throttle:30,1'])->group(function () {
+
+    // download file formation
+    Route::get('/download/{file}', [FileController::class, 'download'])->name('download');
 
     // admin routes
     Route::middleware(['admin'])->group(function() {

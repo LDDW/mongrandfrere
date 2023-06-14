@@ -20,7 +20,7 @@ class FormationController extends Controller
     public function index()
     {
         return view('formations', [
-            'formations' => Formation::all()
+            'formations' => Formation::where('status', 'published')->get(),
         ]);
     }
 
@@ -95,8 +95,8 @@ class FormationController extends Controller
         }
 
         return view('formation', [
-            'formation' => $formation,
-            'randomFormation' => Formation::inRandomOrder()->take(3)->get()
+            'formation' => $formation->with('file')->first(),
+            'randomFormation' => Formation::where('status', 'published')->whereNot('id',$formation->id)->inRandomOrder()->take(3)->get()
         ]);
     }
 

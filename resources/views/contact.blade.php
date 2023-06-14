@@ -1,4 +1,9 @@
 <x-app-layout>
+
+    {{-- SEO --}}
+    @section('pageTitle') Contact @endsection
+    @section('pageDescription') Contactez-nous directement ici ! @endsection
+
     <div class="mx-auto py-10">
         <div class="w-full bg-white shadow-md overflow-hidden rounded-xl p-10 max-w-md md:max-w-xl mx-auto">
             <form method="POST" action="{{ Route('contact.store') }}" enctype="multipart/form-data">

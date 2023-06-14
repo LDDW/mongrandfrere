@@ -19,4 +19,8 @@ class File extends Model
         'file_name',
         'formation_id',
     ];
+
+    public function formation () {
+        return $this->belongsTo(Formation::class, 'formation_id');
+    }
 }

@@ -1,4 +1,9 @@
 <x-app-layout>
+
+    {{-- SEO --}}
+    @section('pageTitle') Mentions légales @endsection
+    @section('pageDescription') Mentions légales du site @endsection
+
     <div class="px-6 lg:px-20 xl:px-44 py-10">
         <div class="md:max-w-2xl md:mx-auto lg:max-w-4xl xl:max-w-6xl legal">
             <h1>Mentions légales</h1>

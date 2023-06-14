@@ -13,7 +13,6 @@
     </x-slot>
     @if (count($orders) > 0)
         <x-slot name="thead">
-            <th class="w-60 text-left select-none">ID STRIPE</th>
             <th class="w-32 text-left select-none">MONTANT</th>
             <th class="w-60 text-left select-none flex justify-between pr-4 cursor-pointer" wire:click="dateAsc">
                 <span>DATE</span>
@@ -29,15 +28,16 @@
             </th>
             <th class="w-96 text-left select-none">FORMATION</th>
             <th class="w-96 text-left select-none">UTILISATEUR</th>
+            <th class="w-60 text-left select-none">STATUS</th>
         </x-slot>
         <x-slot name="tbody">
             @foreach ($orders as $i => $order)
                 <tr class="h-12 {{$i % 2 == 0 ? 'bg-gray-50' :''}} border-t border-gray-200 text-gray-900 flex flex-row">
-                    <td class="w-60"><p class="truncate">{{ $order->stripe_id }}</p></td>
                     <td class="w-32"><p class="truncate">{{ $order->formation->price }} €</p></td>
                     <td class="w-60"><p class="truncate">{{ $order->created_at }}</p></td>
-                    <td class="w-96"><p class="truncate">{{ $order->formation->name }}</p></td>
+                    <td class="w-96"><p class="truncate">{{ $order->formation->title }}</p></td>
                     <td class="w-96"><p class="truncate">{{ $order->user->email }}</p></td>
+                    <td class="w-60"><p class="truncate">{{ $order->status === 'paid' ? 'Payé' : 'Impayé' }}</p></td>
                     <td class="w-full min-w-[128px] pl-2 h-12 flex items-center gap-2">
 
                         <a href="{{ Route('admin.user', ['user' => $order->id]) }}">
