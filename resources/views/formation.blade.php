@@ -6,11 +6,11 @@
     
     <section class="bg-white article p-6 max-w-5xl" data-aos="zoom-in-up">
         @php
-            @if (isset(auth()->user()->order))
+            if (isset(auth()->user()->order)){
                 $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
                     return $order->formation_id === $formation->id && $order->status === 'paid';
                 });
-            @endif
+            }
         @endphp
         <img src="{{ asset('storage/formations/'.$formation->img_name) }}" alt="Image de la formation nommé : {{ $formation->title }}" class="aspect-square w-full h-60 bg-gray-50" data-aos="zoom-in-up" data-aos-delay="100">
         <h1 data-aos="zoom-in-up" data-aos-delay="200">{{ $formation->title }}</h1>
