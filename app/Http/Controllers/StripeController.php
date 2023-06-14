@@ -96,7 +96,6 @@ class StripeController extends Controller
                 'error' => $e->getMessage(),
             ]);
         }
-        
 
         return redirect()->route('formations');
     }
