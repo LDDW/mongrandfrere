@@ -49,7 +49,7 @@
     @endif
 
     <section>
-        <h2 class="text-2xl mb-10 font-semibold" data-aos="zoom-in-up"><span class="text-[#57C5B6]">Tous</span> nos articles</h2>
+        <h2 class="text-2xl font-semibold" data-aos="zoom-in-up"><span class="text-[#57C5B6]">Tous</span> nos articles</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative">
             <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
             @foreach ($articles as $article)
