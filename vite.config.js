@@ -5,7 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
+                'resources/css/app.min.css',
                 'resources/css/glide.core.min.css',
                 'resources/js/app',
                 'resources/js/glide.conf.js',
