@@ -95,7 +95,7 @@ class FormationController extends Controller
         }
 
         return view('formation', [
-            'formation' => $formation->with('file')->first(),
+            'formation' => Formation::where('status', 'published')->where('id',$formation->id)->with('file')->first(),
             'randomFormation' => Formation::where('status', 'published')->whereNot('id',$formation->id)->inRandomOrder()->take(3)->get()
         ]);
     }

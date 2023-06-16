@@ -19,7 +19,7 @@
             <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
             @foreach ($formations as $formation)
                 @php
-                    if(isset(auth()->user()->order)){
+                    if(count(auth()->user()->order) > 0){
                         $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
                             return $order->formation_id === $formation->id && $order->status === 'paid';
                         });

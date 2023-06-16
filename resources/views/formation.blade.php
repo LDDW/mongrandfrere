@@ -6,7 +6,7 @@
     
     <section class="bg-white article p-6 max-w-5xl" data-aos="zoom-in-up">
         @php
-            if (isset(auth()->user()->order)){
+            if (count(auth()->user()->order) > 0){
                 $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
                     return $order->formation_id === $formation->id && $order->status === 'paid';
                 });
