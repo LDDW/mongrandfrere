@@ -32,7 +32,7 @@
                         </div>
                         <h3 class="text-xl font-semibold truncate mb-2">{{ $formation->title }}</h3>
                         <p class="mb-4 truncate">{{ strip_tags($formation->content) }}</p>
-                        @if ($isFormationPaid)
+                        @if (isset($isFormationPaid) && $isFormationPaid)
                             <button class="py-2.5 px-4 bg-[#57C5B6] text-white rounded-xl w-full">Voir la formation</button>
                         @else
                             <div class="flex items-center justify-between">

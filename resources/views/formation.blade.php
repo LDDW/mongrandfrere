@@ -14,7 +14,7 @@
         @endphp
         <img src="{{ asset('storage/formations/'.$formation->img_name) }}" alt="Image de la formation nommé : {{ $formation->title }}" class="aspect-square w-full h-60 bg-gray-50" data-aos="zoom-in-up" data-aos-delay="100">
         <h1 data-aos="zoom-in-up" data-aos-delay="200">{{ $formation->title }}</h1>
-        @if ($isFormationPaid)
+        @if (isset($isFormationPaid) && $isFormationPaid)
             <h2>Fichier de la formation</h2>
             @foreach ($formation->file as $file)
                 <a href="{{ Route('download', ['file' => $file->id]) }}" class="bg-[#57C5B6] text-white flex items-center justify-between rounded-xl py-3 px-4">
