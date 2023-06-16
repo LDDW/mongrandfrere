@@ -22,11 +22,13 @@
         @vite(['resources/css/app.min.css', 'resources/js/app.min.js'])
 
         <!-- Styles -->
+        @toastScripts
         @livewireStyles
         @stack('styles')
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+        <livewire:toasts />
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')

@@ -56,6 +56,7 @@ class StripeController extends Controller
 
         try {
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
+            
             if (!$session) {
                 throw new NotFoundHttpException;
             }
@@ -68,12 +69,11 @@ class StripeController extends Controller
                 $order->status = 'paid';
                 $order->save();
             }
-            Mail::to(auth()->user()->email)->send(new OrderMail());
 
             // toast succes
             toast()
                 ->success('Votre commande a bien été prise en compte !', 'Commande réussie')
-                ->pushOnNextPage();
+                ->push();
 
             // log success
             Log::info('Order success', [
@@ -81,7 +81,7 @@ class StripeController extends Controller
                 'function' => $backtrace['function'],
             ]);
 
-            return redirect()->route('formation', ['formation' => $order->formation_id]);
+            // return view('success');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
             // toast error
@@ -95,6 +95,7 @@ class StripeController extends Controller
                 'function' => $backtrace['function'],
                 'error' => $e->getMessage(),
             ]);
+            
         }
 
         return redirect()->route('formations');
