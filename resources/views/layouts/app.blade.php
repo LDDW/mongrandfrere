@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         {{-- SEO --}}
-        <meta name="keywords" content="Conseils, aide, Orientation professionnelle, développement de carrière, réseau professionnel, employabilité, compétences professionnelles, insertion professionnelle, Services, Lettre de motivation pertinente, formation professionnelle, conseils pour l’emploi, Coach, Coach recherche emploi, coach entretien d'embauche, coach emploi, coaching emploi">
+        <meta name="keywords" content="Conseils, aide, Orientation professionnelle, développement de carrière, réseau professionnel, employabilité, compétences professionnelles, insertion professionnelle, Services, Lettre de motivation pertinente, formation professionnelle, conseils pour l’emploi, Coach, Coach recherche emploi, coach entretien d'embauche, coach emploi, coaching emploi, mon grand frére, mongrandfrere">
         <meta name="robots" content="index, follow">
         <title>{{ config('app.name', 'MonGrandFrère') }} - @yield('pageTitle')</title>
         <meta name="description" content="@yield('pageDescription')">
