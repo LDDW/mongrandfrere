@@ -5,13 +5,15 @@
     @section('pageDescription') {{ strip_tags($formation->content) }} @endsection
     
     <section class="bg-white article p-6 max-w-5xl" data-aos="zoom-in-up">
-        @php
-            if (count(auth()->user()->order) > 0){
-                $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
-                    return $order->formation_id === $formation->id && $order->status === 'paid';
-                });
-            }
-        @endphp
+        @auth
+            @php
+                if (count(auth()->user()->order) > 0){
+                    $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
+                        return $order->formation_id === $formation->id && $order->status === 'paid';
+                    });
+                }
+            @endphp
+        @endauth
         <img src="{{ asset('storage/formations/'.$formation->img_name) }}" alt="Image de la formation nommé : {{ $formation->title }}" class="aspect-square w-full h-60 bg-gray-50" data-aos="zoom-in-up" data-aos-delay="100">
         <h1 data-aos="zoom-in-up" data-aos-delay="200">{{ $formation->title }}</h1>
         @if (isset($isFormationPaid) && $isFormationPaid)
@@ -44,18 +46,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative">
                 <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
                 @foreach ($randomFormation as $article)
-                    @php
-                        if (isset(auth()->user()->order)) {
-                            $isRandomFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
-                                return $order->formation_id === $formation->id && $order->status === 'paid';
-                            });
-                        }
-                    @endphp
+                    @auth
+                        @php
+                            if (isset(auth()->user()->order)) {
+                                $isRandomFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
+                                    return $order->formation_id === $formation->id && $order->status === 'paid';
+                                });
+                            }
+                        @endphp
+                    @endauth
                     <a href="{{ Route('formation', ['formation' => $article->id]) }}" data-aos="zoom-in-up" class="grid grid-cols-1 gap-4">
                         <img src="{{ asset('storage/formations/'.$article->img_name) }}" alt="Image de l'article nommé : {{ $article->title }}" class="aspect-square bg-gray-50 rounded-xl">
                         <div class="flex items-center justify-between">
                             <h3 class="text-xl font-semibold truncate">{{ $article->title }}</h3>
-                            @if (!$isRandomFormationPaid)
+                            @if (!isset($isRandomFormationPaid))
                                 <p>{{ $article->price }}€</p>
                             @endif
                         </div>

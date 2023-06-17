@@ -18,6 +18,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative">
             <div class="absolute w-full h-full -z-10 opacity-20 bg_icon"></div>
             @foreach ($formations as $formation)
+            @auth
                 @php
                     if(count(auth()->user()->order) > 0){
                         $isFormationPaid = auth()->user()->order->contains(function ($order) use ($formation) {
@@ -25,6 +26,8 @@
                         });
                     }
                 @endphp
+            @endauth
+                    
                 <a href="{{ Route('formation', ['formation' => $formation->id]) }}" data-aos="zoom-in-up">
                     <div class="bg-white p-4 rounded-xl">
                         <div class="w-full aspect-square bg-gray-300 rounded-xl overflow-hidden mb-3">
